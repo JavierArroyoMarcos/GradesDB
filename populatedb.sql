@@ -98,3 +98,29 @@ INSERT INTO subjects (
     (15, 3, 'Introducción a la Ingeniería del Software y los Sistemas de Información II', 'IISSI-2', 6, 2, 'Obligatoria'),
     (16, 3, 'Sistemas Operativos', 'SO', 6, 2, 'Obligatoria'),
     (17, 3, 'Inteligencia Artificial', 'IA', 6, 2, 'Obligatoria');
+
+
+-- 2.1
+INSERT INTO people (dni, first_name, last_name, age, email)
+VALUES ('99999999Z', 'Juan', 'Test', 15, 'juan@test.es');
+
+INSERT INTO people (dni, first_name, last_name, age, email)
+VALUES ('88888888A', 'Ana', 'Test', 25, 'ana@test.es');
+
+INSERT INTO people (dni, first_name, last_name, age, email)
+VALUES ('88888888A', 'Pedro', 'Test', 30, 'pedro@test.es');
+
+-- 2.2
+INSERT INTO people (person_id, dni, first_name, last_name, age, email)
+VALUES (1000, '11111111A', 'Carlos', 'Profesor', 45, 'carlos@us.es');
+
+INSERT INTO professors (professor_id, category)
+VALUES (1000, 'Adjunto');
+
+
+-- 2.3
+INSERT INTO people (person_id, dni, first_name, last_name, age, email)
+VALUES (2000, '22222222B', 'María', 'Estudiante', 20, 'maria@us.es');
+
+INSERT INTO students (student_id, access_method)
+VALUES (2000, 'Erasmus');
