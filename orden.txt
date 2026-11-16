@@ -1,9 +1,0 @@
-Orden ejecutar:
-
-1. createdb.sql (crea la base de datos y las tablas)
-2. populatedb.sql (inserta los datos iniciales)
-3. populatedb2.sql (inserta los datos extra)
-4. functions.sql (crea las funciones)
-5. triggers.sql (crea los triggers, depende de las funciones)
-6. tests_constraints.sql (crea los tests base)
-7. tests.sql (ejecuta TODOS los tests)
