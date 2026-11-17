@@ -136,3 +136,64 @@ CREATE TABLE teaching_loads (
     FOREIGN KEY (professor_id) REFERENCES professors(professor_id),
     FOREIGN KEY (group_id) REFERENCES groups(group_id)
 );
+
+
+
+
+
+
+
+
+-- ------------------ LAB 2: -------------------------------------------------------------------
+------------------- RESTRICCIONES ---------------------------------------------------------------
+ALTER TABLE people
+    ADD CONSTRAINT ck_people_rn12_age CHECK (age BETWEEN 16 AND 70),  -- edad en ese rango
+    ADD CONSTRAINT ck_people_rn14_dni CHECK (dni REGEXP '^[0-9]{8}[A-Za-z]$'), -- dni REGEXP: dni debe de cumplir con una expresión regular(REGEXP)
+                                                                               -- '^[0-9]{8}[A-Za-z]$': 
+                                                                               -- ^: "El texto tiene que EMPEZAR exactamente aquí".
+                                                                               -- [0-9]{8}: Haya exactamente 8 números (del 0 al 9)
+                                                                               -- [A-Za-z]: Obliga a que justo después haya una sola letra, mayúscula (A-Z) o minúscula (a-z).
+                                                                               -- $: "Y aquí TERMINA el texto". Es decir, no puede haber más números, letras ni espacios después.
+    ADD CONSTRAINT uq_people_dni UNIQUE (dni),  -- dni no se puede repetir
+    ADD CONSTRAINT uq_people_email UNIQUE (email); -- email no se puede repetir
+
+
+
+ALTER TABLE professors
+    ADD CONSTRAINT ck_professors_category CHECK (
+        category IN ('Ayudante','AyudanteDoctor','Titular','Catedrático')
+    );     -- Solamente puede haber esas categorías
+
+
+ALTER TABLE students
+    ADD CONSTRAINT ck_students_access_method CHECK (
+        access_method IN ('Selectividad','Ciclo','Mayor','Titulado','Extranjero')
+    );    -- Solamente puede haber esas categorías
+
+ALTER TABLE students
+    ADD CONSTRAINT ck_students_access_method CHECK (
+        access_method IN ('Selectividad','Ciclo','Mayor','Titulado','Extranjero')
+    );
+
+ALTER TABLE degrees
+    ADD CONSTRAINT ck_degrees_rn13_duration CHECK (duration_years BETWEEN 3 AND 6), -- Duración sea entre 3 y 6
+    ADD CONSTRAINT uq_degrees_name UNIQUE (degree_name); -- No dos grados con el mismo nombre
+
+ALTER TABLE subjects
+    ADD CONSTRAINT ck_subjects_rn10_credits CHECK (credits IN (6, 12)),  -- 6 o 12
+    ADD CONSTRAINT ck_subjects_rn16_course CHECK (course BETWEEN 1 AND 6), -- entre 1 y 6
+    ADD CONSTRAINT ck_subjects_type CHECK (subject_type IN ('Formación Básica','Obligatoria','Optativa')),
+    ADD CONSTRAINT uq_subjects_name UNIQUE (subject_name),
+    ADD CONSTRAINT uq_subjects_acronym UNIQUE (acronym);
+
+ALTER TABLE groups
+    ADD CONSTRAINT ck_groups_rn15_year CHECK (academic_year BETWEEN 2000 AND 2100),
+    ADD CONSTRAINT ck_groups_activity CHECK (activity IN ('Teoría','Laboratorio')),
+    ADD CONSTRAINT uq_groups_name UNIQUE (subject_id, group_name, academic_year);
+
+ALTER TABLE teaching_loads
+    ADD CONSTRAINT ck_teaching_loads_credits CHECK (credits > 0);  -- Créditos positivos
+
+    ADD CONSTRAINT ck_grades_rn11_value CHECK (grade_value BETWEEN 0 AND 10),
+    ADD CONSTRAINT ck_grades_rn01_with_honors CHECK (with_honors = 0 OR grade_value >= 9), -- matricula de honor con un 9 o más
+    ADD CONSTRAINT ck_grades_exam_call CHECK (exam_call IN ('Primera','Segunda','Tercera','Extraordinaria'));
