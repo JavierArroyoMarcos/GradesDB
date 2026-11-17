@@ -95,3 +95,24 @@ WHERE activity = 'Teoría';
 -- 3 Borrar notas de suspenso
 DELETE FROM grades
 WHERE grade_value < 5;
+
+
+-- TIPOS DE BORRADOS
+
+-- CASCADE: elimina automáticamente las filas que referencian la fila borrada.
+FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
+
+-- RESTRICT: si existen referencias no se permite el borrado.
+DELETE FROM degrees WHERE degree_id = 1;
+
+-- SET NULL: establece a NULL la clave ajena. Solo posible si la columna permite NULL
+FOREIGN KEY (degree_id) REFERENCES degrees(degree_id) ON DELETE SET NULL
+
+-- Para permitir usar ON DELETE CASCADE
+-- -- ANTES
+-- FOREIGN KEY (subject_id) REFERENCES subjects(subject_id)
+-- -- DESPUÉS
+-- FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
+
+
+
