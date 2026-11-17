@@ -9,8 +9,11 @@ SET FOREIGN_KEY_CHECKS = 0; -- Interruptor para q las tablas se puedan borrar si
 DROP TABLE IF EXISTS people; -- Elimina la tabla si ya existía 
 DROP TABLE IF EXISTS professors;  -- Primero se pone la tabla principal y después la secundaria
 DROP TABLE IF EXITSTS students;
-SET FOREIGN_KEY_CHECKS = 1;
 
+DROP TABLE IF EXITSTS degrees;
+DROP TABLE IF EXITSTS subjects;
+SET FOREIGN_KEY_CHECKS = 1;
+-- ---------------------------------PERSONAS ------------------------------------------------
 CREATE TABLE people (       
     person_id INT AUTO_INCREMENT, -- Crea una columna de números enteros que se numera automáticamente (1, 2, 3...).
     dni CHAR(9) NOT NULL,         -- Deja un hueco de 9 caracteres. No puede dejarse en blanco (NOT NULL).
@@ -37,3 +40,27 @@ CREATE TABLE students (
     FOREIGN KEY (student_id) REFERENCES people(person_id)
 );
 
+-- RELACIÓN 1:1: (1)profesor corresponde a exactamente una (1) persona
+-- FOREIGN KEY (b_id) REFERENCES people(a_id)
+-- ----------------------------GRADOS-----------------------------------------------
+CREATE TABLE degrees (
+    degree_id INT AUTO_INCREMENT,
+    degree_name VARCHAR(80) NOT NULL,
+    duration_years TINYINT NOT NULL,
+    PRIMARY KEY (degree_id)
+);
+
+CREATE TABLE subjects (
+    subject_id INT AUTO_INCREMENT,
+    degree_id INT NOT NULL,
+    subject_name VARCHAR(120) NOT NULL,
+    acronym VARCHAR(12) NOT NULL,
+    credits TINYINT NOT NULL,
+    course TINYINT NOT NULL,
+    subject_type VARCHAR(30) NOT NULL,
+    PRIMARY KEY (subject_id),
+    FOREIGN KEY (degree_id) REFERENCES degrees(degree_id)
+);
+
+-- Relación 1:N (1) grado corresponde a (muchas) asignaturas
+-- FOREIGN KEY (a_id) REFERENCES degrees(a_id)

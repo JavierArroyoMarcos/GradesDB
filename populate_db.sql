@@ -8,12 +8,17 @@ SET FOREIGN_KEY_CHECKS = 0; -- Interruptor para q las tablas se puedan borrar si
 DELETE FROM people; -- Elimina los datos si ya existía 
 DELETE FROM professors;  -- Primero se pone los datos de la tabla principal y después la secundaria
 DELETE FROM students;
+
+DELETE FROM degrees;
+DELETE FROM subjects;
 SET FOREIGN_KEY_CHECKS = 1;
 
 
 -- DROP para tablas: DDL
 -- DELETE para datos: DML
 
+
+-- ---------------------- PERSONAS ----------------------------
 	-- Añado valores a la tabla recién creada
 INSERT INTO people (person_id, dni, first_name, last_name, age, email) VALUES
     (1, '00000001A', 'David', 'Ruiz', 50, 'druiz@us.es'),  -- Profesor
@@ -72,3 +77,29 @@ INSERT INTO students (student_id, access_method) VALUES
     (24, 'Selectividad'),
     (25, 'Selectividad');
 
+
+-- ---------------------------GRADOS ----------------------------
+INSERT INTO degrees (degree_id, degree_name, duration_years) VALUES
+        (1, 'Ingeniería del Software', 4),
+        (2, 'Ingeniería de Computadores', 4),
+        (3, 'Tecnologías Informáticas', 4);
+
+
+INSERT INTO subjects (subject_id,degree_id,subject_name,acronym,credits,course,subject_type) VALUES
+    (1, 3, 'Fundamentos de Programación', 'FP', 12, 1, 'Formación Básica'),
+    (2, 3, 'Cálculo Infinitesimal y Numérico', 'CIN', 6, 1, 'Formación Básica'),
+    (3, 3, 'Circuitos Electrónicos Digitales', 'CED', 6, 1, 'Formación Básica'),
+    (4, 3, 'Fundamentos Físicos de la Informática', 'FFI', 6, 1, 'Formación Básica'),
+    (5, 3, 'Introducción a la Matemática Discreta', 'IMD', 6, 1, 'Formación Básica'),
+    (6, 3, 'Administración de Empresas', 'ADE', 6, 1, 'Formación Básica'),
+    (7, 3, 'Álgebra Lineal y Numérica', 'ALN', 6, 1, 'Formación Básica'),
+    (8, 3, 'Estadística', 'EST', 6, 1, 'Formación Básica'),
+    (9, 3, 'Estructura de Computadores', 'EC', 6, 1, 'Formación Básica'),
+    (10, 3, 'Análisis y Diseño de Datos y Algoritmos', 'ADDA', 12, 2, 'Obligatoria'),
+    (11, 3, 'Introducción a la Ingeniería del Software y los Sistemas de Información I', 'IISSI-1', 6, 2, 'Obligatoria'),
+    (12, 3, 'Matemática Discreta', 'MD', 6, 2, 'Obligatoria'),
+    (13, 3, 'Redes de Computadores', 'RC', 6, 2, 'Obligatoria'),
+    (14, 3, 'Arquitectura de Computadores', 'AC', 6, 2, 'Obligatoria'),
+    (15, 3, 'Introducción a la Ingeniería del Software y los Sistemas de Información II', 'IISSI-2', 6, 2, 'Obligatoria'),
+    (16, 3, 'Sistemas Operativos', 'SO', 6, 2, 'Obligatoria'),
+    (17, 3, 'Inteligencia Artificial', 'IA', 6, 2, 'Obligatoria');
