@@ -19,6 +19,8 @@ DROP TABLE IF EXITSTS students_groups;
 DROP TABLE IF EXITSTS grades;
 
 DROP TABLE IF EXITSTS student_subject;
+
+DROP TABLE IF EXITSTS teaching_load;
 SET FOREIGN_KEY_CHECKS = 1;
 -- ---------------------------------PERSONAS ------------------------------------------------
 CREATE TABLE people (       
@@ -120,4 +122,17 @@ CREATE TABLE students_subjects (
     CONSTRAINT uq_students_subjects UNIQUE (student_id, subject_id),
     FOREIGN KEY (student_id) REFERENCES students(student_id), -- N:M
     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) -- N:M
+);
+
+
+-- ----------------------------------------- CARGAS ------------------------
+CREATE TABLE teaching_loads (
+    teaching_load_id INT AUTO_INCREMENT,
+    professor_id INT NOT NULL,
+    group_id INT NOT NULL,
+    credits DECIMAL(4,1) NOT NULL,
+    PRIMARY KEY (teaching_load_id),
+    CONSTRAINT uq_teaching_loads UNIQUE (professor_id, group_id),
+    FOREIGN KEY (professor_id) REFERENCES professors(professor_id),
+    FOREIGN KEY (group_id) REFERENCES groups(group_id)
 );

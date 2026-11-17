@@ -18,6 +18,8 @@ DELETE FROM students_groups;
 DELETE FROM grades;
 
 DELETE FROM students_subjects;
+
+DELETE FROM teaching_load;
 SET FOREIGN_KEY_CHECKS = 1;
 
 
@@ -180,3 +182,11 @@ INSERT INTO students_subjects (student_id, subject_id) VALUES
         (11, 11), (12, 11), (13, 11), (14, 11), (15, 11),
         (16, 11), (17, 11), (18, 11), (19, 11), (20, 11),
         (21, 11), (22, 11), (23, 11), (24, 11), (25, 11);
+
+-- -------------------------------------- CARGAS --------------------------------------------
+INSERT INTO teaching_loads (professor_id, group_id, credits) VALUES
+	(1, 1, 3.0),
+	(2, 1, 3.0),
+	(3, 2, 3.0),
+	(5, 3, 1.5),
+	(4, 3, 1.5);
