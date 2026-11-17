@@ -8,6 +8,7 @@
 SET FOREIGN_KEY_CHECKS = 0; -- Interruptor para q las tablas se puedan borrar sin problemas
 DROP TABLE IF EXISTS people; -- Elimina la tabla si ya existía 
 DROP TABLE IF EXISTS professors;  -- Primero se pone la tabla principal y después la secundaria
+DROP TABLE IF EXITSTS students;
 SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE people (       
@@ -27,5 +28,12 @@ CREATE TABLE professors (
     category VARCHAR(30) NOT NULL,
     PRIMARY KEY (professor_id),   -- El identificador es professor_id
     FOREIGN KEY (professor_id) REFERENCES people(person_id)  -- Señal que professor_id y person_id se refiere a lo mismo
+);
+
+CREATE TABLE students (
+    student_id INT,
+    access_method VARCHAR(20) NOT NULL,
+    PRIMARY KEY (student_id),
+    FOREIGN KEY (student_id) REFERENCES people(person_id)
 );
 
