@@ -12,6 +12,9 @@ DROP TABLE IF EXITSTS students;
 
 DROP TABLE IF EXITSTS degrees;
 DROP TABLE IF EXITSTS subjects;
+
+DROP TABLE IF EXITSTS groups;
+DROP TABLE IF EXITSTS students_groups;
 SET FOREIGN_KEY_CHECKS = 1;
 -- ---------------------------------PERSONAS ------------------------------------------------
 CREATE TABLE people (       
@@ -64,3 +67,26 @@ CREATE TABLE subjects (
 
 -- Relación 1:N (1) grado corresponde a (muchas) asignaturas
 -- FOREIGN KEY (a_id) REFERENCES degrees(a_id)
+
+-- ------------------------------ GRUPOS ------------------------------------------------
+CREATE TABLE groups (
+    group_id INT AUTO_INCREMENT,
+    subject_id INT NOT NULL,
+    group_name VARCHAR(40) NOT NULL,
+    activity VARCHAR(15) NOT NULL,
+    academic_year YEAR NOT NULL,
+    PRIMARY KEY (group_id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id)  -- 1:N (1) asignatura corresponde a (muchos) grupos
+);
+
+CREATE TABLE students_groups (
+    student_group_id INT AUTO_INCREMENT,
+    student_id INT NOT NULL,
+    group_id INT NOT NULL,
+    PRIMARY KEY (student_group_id),
+    CONSTRAINT uq_students_groups UNIQUE (student_id, group_id), -- Restricción: -uq_students_groups(nombre de la nueva restricción)  -UNIQUE: exige q lo de dentro sea único, e este caso la combinación de dentro
+
+    FOREIGN KEY (student_id) REFERENCES students(student_id),  -- N:M (muchos) estudiante corresponde a (muchos) grupos_estudiantes
+    FOREIGN KEY (group_id) REFERENCES groups(group_id)  -- N:M (muchos) grupo corresponde a (muchos) grupos_estudiantes
+    -- 1:N y N:M se escribe igual en FK pero la diferencia es que N:M aparece ambas id en nuestra tabla
+);
