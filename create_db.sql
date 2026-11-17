@@ -17,6 +17,8 @@ DROP TABLE IF EXITSTS groups;
 DROP TABLE IF EXITSTS students_groups;
 
 DROP TABLE IF EXITSTS grades;
+
+DROP TABLE IF EXITSTS student_subject;
 SET FOREIGN_KEY_CHECKS = 1;
 -- ---------------------------------PERSONAS ------------------------------------------------
 CREATE TABLE people (       
@@ -106,4 +108,16 @@ CREATE TABLE grades (
     PRIMARY KEY (grade_id),
     FOREIGN KEY (student_id) REFERENCES students(student_id),  -- N:M
     FOREIGN KEY (group_id) REFERENCES groups(group_id) -- N:M
+);
+
+
+-- --------------------------------ASIGNATURAS -------------------------------
+CREATE TABLE students_subjects (
+    student_subject_id INT AUTO_INCREMENT,
+    student_id INT NOT NULL,
+    subject_id INT NOT NULL,
+    PRIMARY KEY (student_subject_id),
+    CONSTRAINT uq_students_subjects UNIQUE (student_id, subject_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id), -- N:M
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) -- N:M
 );
