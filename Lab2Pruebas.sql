@@ -54,3 +54,34 @@ VALUES (1, 1, 0);
 INSERT INTO grades (student_id, group_id, grade_value, exam_call, with_honors)
 VALUES (1, 1, 8.5, 'Primera', 1);
 
+
+
+
+-- Modificación y borrado de datos: UPDATE y DELETE
+
+-- ACTUALIZAR DATOS UPDATE:
+
+-- UPDATE nombre_tabla
+-- SET columna1 = valor1, columna2 = valor2, ...
+-- WHERE condición;
+
+-- 1 Cambiar email de una persona:
+UPDATE people                       -- Actulizo un dato en la tabla people
+SET email = 'nuevo.email@us.es'     -- Cambio el dato email 
+WHERE person_id = 1;                -- Donde person_id sea igual a 1
+
+-- 2 Incrementar duración de todos los grados
+UPDATE degrees
+SET duration_years = duration_years + 1;
+
+-- 3 Cambiar de 'AyudanteDoctor' a category = 'Titular'
+UPDATE professors
+SET category = 'Titular'
+WHERE category = 'AyudanteDoctor';
+
+-- ELIMINAR DATOS DELETE:
+
+-- DELETE FROM nombre_tabla
+-- WHERE condición;
+
+-- 1 Borrar 
