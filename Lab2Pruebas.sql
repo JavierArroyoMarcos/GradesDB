@@ -84,4 +84,14 @@ WHERE category = 'AyudanteDoctor';
 -- DELETE FROM nombre_tabla
 -- WHERE condición;
 
--- 1 Borrar 
+-- 1 Borrar una persona en específico
+DELETE FROM people
+WHERE person_id = 100;
+
+-- 2 Borrar todos los datos de teoría
+DELETE FROM groups
+WHERE activity = 'Teoría';
+
+-- 3 Borrar notas de suspenso
+DELETE FROM grades
+WHERE grade_value < 5;
