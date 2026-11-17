@@ -5,8 +5,10 @@
 -- Se incluye en: 
 --
 
-
+SET FOREIGN_KEY_CHECKS = 0; -- Interruptor para q las tablas se puedan borrar sin problemas
 DROP TABLE IF EXISTS people; -- Elimina la tabla si ya existía 
+DROP TABLE IF EXISTS professors;  -- Primero se pone la tabla principal y después la secundaria
+SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE people (       
     person_id INT AUTO_INCREMENT, -- Crea una columna de números enteros que se numera automáticamente (1, 2, 3...).
@@ -17,3 +19,13 @@ CREATE TABLE people (
     email VARCHAR(255) NOT NULL,  
     PRIMARY KEY (person_id)       -- Define 'person_id' como el identificador único principal de cada registro en la tabla.
 );                           
+
+-- Definición tabla professors
+
+CREATE TABLE professors (
+    professor_id INT,
+    category VARCHAR(30) NOT NULL,
+    PRIMARY KEY (professor_id),   -- El identificador es professor_id
+    FOREIGN KEY (professor_id) REFERENCES people(person_id)  -- Señal que professor_id y person_id se refiere a lo mismo
+);
+
