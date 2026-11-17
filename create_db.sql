@@ -15,6 +15,8 @@ DROP TABLE IF EXITSTS subjects;
 
 DROP TABLE IF EXITSTS groups;
 DROP TABLE IF EXITSTS students_groups;
+
+DROP TABLE IF EXITSTS grades;
 SET FOREIGN_KEY_CHECKS = 1;
 -- ---------------------------------PERSONAS ------------------------------------------------
 CREATE TABLE people (       
@@ -89,4 +91,19 @@ CREATE TABLE students_groups (
     FOREIGN KEY (student_id) REFERENCES students(student_id),  -- N:M (muchos) estudiante corresponde a (muchos) grupos_estudiantes
     FOREIGN KEY (group_id) REFERENCES groups(group_id)  -- N:M (muchos) grupo corresponde a (muchos) grupos_estudiantes
     -- 1:N y N:M se escribe igual en FK pero la diferencia es que N:M aparece ambas id en nuestra tabla
+);
+
+
+
+-- -------------------------------- NOTAS -----------------------------------------
+CREATE TABLE grades (
+    grade_id INT AUTO_INCREMENT,
+    student_id INT NOT NULL,
+    group_id INT NOT NULL,
+    grade_value DECIMAL(4,2) NOT NULL,
+    exam_call VARCHAR(20) NOT NULL,
+    with_honors BOOLEAN NOT NULL DEFAULT 0, -- 0 o 1
+    PRIMARY KEY (grade_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id),  -- N:M
+    FOREIGN KEY (group_id) REFERENCES groups(group_id) -- N:M
 );
