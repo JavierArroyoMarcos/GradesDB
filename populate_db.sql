@@ -4,14 +4,22 @@
 -- Descripción: 
 -- Se incluye en: 
 --
-DELETE FROM people;
+SET FOREIGN_KEY_CHECKS = 0; -- Interruptor para q las tablas se puedan borrar sin problemas
+DELETE FROM people; -- Elimina los datos si ya existía 
+DELETE FROM professors;  -- Primero se pone los datos de la tabla principal y después la secundaria
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+-- DROP para tablas: DDL
+-- DELETE para datos: DML
+
 	-- Añado valores a la tabla recién creada
 INSERT INTO people (person_id, dni, first_name, last_name, age, email) VALUES
-    (1, '00000001A', 'David', 'Ruiz', 50, 'druiz@us.es'),
-    (2, '00000002B', 'Inma', 'Hernández', 40, 'inmahernandez@us.es'),
-    (3, '00000003C', 'Fernando', 'Sola', 28, 'fsola@us.es'),
-    (4, '00000004D', 'Daniel', 'Ayala', 32, 'dayala1@us.es'),
-    (5, '00000005E', 'Pepe', 'Calderón', 43, 'pepecalderon@us.es'),
+    (1, '00000001A', 'David', 'Ruiz', 50, 'druiz@us.es'),  -- Profesor
+    (2, '00000002B', 'Inma', 'Hernández', 40, 'inmahernandez@us.es'), -- Profesor
+    (3, '00000003C', 'Fernando', 'Sola', 28, 'fsola@us.es'), -- Profesor
+    (4, '00000004D', 'Daniel', 'Ayala', 32, 'dayala1@us.es'), -- Profesor
+    (5, '00000005E', 'Pepe', 'Calderón', 43, 'pepecalderon@us.es'), -- Profesor
     (6, '10000006F', 'David', 'Romero', 22, 'david.romero@alum.us.es'),
     (7, '10000007G', 'Lucía', 'Molina', 21, 'lucia.molina@alum.us.es'),
     (8, '10000008H', 'Hugo', 'Paredes', 20, 'hugo.paredes@alum.us.es'),
@@ -33,3 +41,10 @@ INSERT INTO people (person_id, dni, first_name, last_name, age, email) VALUES
     (24, '10000024Z', 'Álex', 'Delgado', 22, 'alex.delgado@alum.us.es'),
     (25, '10000025A', 'Paula', 'Bermejo', 21, 'paula.bermejo@alum.us.es');
 
+
+INSERT INTO professors (professor_id, category) VALUES
+    (1, 'Catedrático'),
+    (2, 'Titular'),
+    (3, 'AyudanteDoctor'),
+    (4, 'Titular'),
+    (5, 'Ayudante');
