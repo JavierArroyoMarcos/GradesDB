@@ -299,3 +299,150 @@ JOIN groups gr ON s.subject_id = gr.subject_id
 JOIN students_groups ge ON gr.group_id = ge.group_id
 JOIN students st ON ge.student_id = st.student_id
 JOIN people p ON st.student_id = p.person_id;
+
+-- 28
+SELECT COUNT(*) AS total_honors
+FROM v_grades_with_honors;
+
+-- 29
+SELECT v.first_name, v.last_name, AVG(v.grade_value) AS average_grade
+FROM v_student_grades v
+GROUP BY v.person_id, v.first_name, v.last_name;
+
+
+
+-- ORDER BY, LIMIT y OFFSET
+-- ORDER BY:  SELECT columnas FROM tabla WHERE condiciones ORDER BY columna ASC|DESC;
+-- LIMIT:     SELECT columnas FROM tabla WHERE condiciones ORDER BY columna ASC|DESC LIMIT cantidad;
+-- OFFSET:    SELECT columnas FROM tabla WHERE condiciones ORDER BY columna ASC|DESC LIMIT cantidad OFFSET salto;
+
+-- 30 ORDER BY(ASC)
+SELECT g.grade_id, g.student_id, g.grade_value, g.exam_call
+FROM grades g
+ORDER BY g.grade_value ASC;  -- ASC se puede omitir
+
+-- 31 ORDER BY(DESC)
+SELECT g.grade_id, g.student_id, g.grade_value, g.exam_call
+FROM grades g
+ORDER BY g.grade_value DESC;
+
+-- 32 LIMIT
+SELECT g.grade_id, g.student_id, g.grade_value, g.exam_call
+FROM grades g
+ORDER BY g.grade_value DESC
+LIMIT 5;  -- LIMITA cuantos se muestran
+
+-- 33 ORDENACIÓN MÚLTIPLE
+SELECT 
+    st.first_name,
+    st.last_name,
+    g.grade_value,
+    g.exam_call
+FROM grades g
+JOIN v_students st ON g.student_id = st.student_id
+WHERE g.grade_value >= 5
+ORDER BY st.last_name ASC, st.first_name ASC;
+-- Se ordena por la primera, y solo si hay empate usa la segunda para desempatar.
+
+-- 34 OFFSET (salta n filas)
+-- Consulta 34: Paginación - Segunda página de 5 notas
+SELECT g.grade_id, g.student_id, g.grade_value
+FROM grades g
+ORDER BY g.grade_value DESC
+LIMIT 5 OFFSET 5;
+
+-- 35 OFFSET
+SELECT g.grade_id, g.student_id, g.grade_value
+FROM grades g
+ORDER BY g.grade_value DESC
+LIMIT 5 OFFSET 10;
+
+-- 36 ORDER BY
+SELECT g.group_name, g.activity, g.academic_year
+FROM groups g
+ORDER BY g.academic_year DESC, g.group_name ASC;
+
+
+-- JOIN:       SELECT columnas FROM tabla1 t1 JOIN tabla2 t2 ON t1.id = t2.id WHERE condiciones;
+-- INNER JOIN: SELECT columnas FROM tabla1 t1 INNER JOIN tabla2 t2 ON t1.id = t2.id WHERE condiciones;
+-- LEFT JOIN:  SELECT columnas FROM tabla1 t1 LEFT JOIN tabla2 t2 ON t1.id = t2.id WHERE condiciones;
+-- RIGHT JOIN: SELECT columnas FROM tabla1 t1 RIGHT JOIN tabla2 t2 ON t1.id = t2.id WHERE condiciones;
+
+-- JOIN / INNER JOIN: Solo devuelve las filas que coinciden en ambas tablas.
+-- LEFT JOIN: Devuelve todas las filas de tabla1 (la de la izquierda) y las que coincidan de tabla2 (si no hay coincidencia, rellena con NULL)
+-- RIGHT JOIN: Al revés; devuelve todas las filas de tabla2 (la de la derecha) y las que coincidan de tabla1
+
+-- 37: INNER JOIN(JOIN)
+SELECT 
+    st.first_name,
+    st.last_name,
+    gr.group_name,
+    gr.activity,
+    gr.academic_year
+FROM v_students st
+JOIN students_groups ge ON st.student_id = ge.student_id   -- N:M se usa una tabla intermedia(2 JOINS)
+JOIN groups gr ON ge.group_id = gr.group_id;
+
+-- 38: -- 1:M
+SELECT 
+    d.degree_name,
+    s.subject_name,
+    s.acronym,
+    s.credits,
+    s.course,
+    s.subject_type
+FROM degrees d
+JOIN subjects s ON d.degree_id = s.degree_id
+ORDER BY d.degree_name, s.course;
+
+
+-- 39
+SELECT 
+    st.first_name,
+    st.last_name,
+    s.subject_name,
+    s.acronym,
+    g.grade_value,
+    g.exam_call,
+    gr.academic_year
+FROM grades g
+JOIN v_students st ON g.student_id = st.student_id
+JOIN groups gr ON g.group_id = gr.group_id
+JOIN subjects s ON gr.subject_id = s.subject_id;
+
+
+-- 40
+SELECT 
+    pr.first_name,
+    pr.last_name,
+    pr.category,
+    s.subject_name,
+    gr.group_name,
+    gr.activity,
+    tl.credits AS teaching_credits
+FROM v_professors pr
+JOIN teaching_loads tl ON pr.professor_id = tl.professor_id
+JOIN groups gr ON tl.group_id = gr.group_id
+JOIN subjects s ON gr.subject_id = s.subject_id;
+
+-- 41 
+SELECT DISTINCT  -- elimina los duplicados
+    st.first_name,
+    st.last_name,
+    s.subject_name,
+    s.acronym,
+    gr.academic_year
+FROM v_students st
+JOIN students_groups ge ON st.student_id = ge.student_id
+JOIN groups gr ON ge.group_id = gr.group_id
+JOIN subjects s ON gr.subject_id = s.subject_id
+ORDER BY st.last_name, s.subject_name;
+
+-- 42: LEFT JOIN Todos los datos de la tabla de la izq(students)  FROM Izq LEFT JOINT Der
+SELECT 
+    st.first_name,
+    st.last_name,
+    g.grade_value,
+    g.exam_call
+FROM v_students st
+LEFT JOIN grades g ON st.student_id = g.student_id;
