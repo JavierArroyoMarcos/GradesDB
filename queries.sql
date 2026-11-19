@@ -224,3 +224,16 @@ WHERE s.subject_name LIKE 'Fundamentos%';
 SELECT p.first_name, p.last_name
 FROM people p
 WHERE p.first_name LIKE '_____';
+
+
+-- FILTRADO
+-- 26
+SELECT g.group_name, g.activity, g.academic_year
+FROM groups g
+WHERE g.academic_year = 2024;
+
+-- 27
+SELECT g.group_name, g.activity, g.academic_year
+FROM groups g
+WHERE g.academic_year BETWEEN 2020 AND 2023
+ORDER BY g.academic_year;
