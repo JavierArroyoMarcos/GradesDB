@@ -170,3 +170,28 @@ FROM subjects s;
 SELECT DISTINCT g.academic_year
 FROM groups g
 ORDER BY g.academic_year DESC;      -- ASC es por defecto
+
+
+-- SUBCONSULTAS
+-- SUBCONSULTA (1 valor): SELECT columnas FROM tabla1 WHERE columna = (SELECT FUNCION(col) FROM tabla2);
+-- SUBCONSULTA (varios):  SELECT columnas FROM tabla1 WHERE columna IN (SELECT col FROM tabla2 WHERE condiciones);
+
+-- 20
+SELECT MAX(g.grade_value) AS max_grade
+FROM grades g
+WHERE g.student_id = 6;
+
+-- 21
+SELECT DISTINCT ge.student_id
+FROM students_groups ge
+WHERE ge.group_id IN (      -- el SEGUNDO SELECT es para filtrar 
+    SELECT g.group_id 
+    FROM groups g 
+    WHERE g.academic_year = 2024
+);
+
+
+-- 22
+SELECT s.subject_name, s.credits
+FROM subjects s
+WHERE s.credits > (SELECT AVG(credits) FROM subjects);
