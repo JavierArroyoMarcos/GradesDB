@@ -1,10 +1,11 @@
 --
--- Autor: David Ruiz
--- Fecha: Octubre de 2026
+-- Autor: Javier Arroyo Marcos
+-- Fecha: 17/11
 -- Descripción: Datos adicionales para grades_db para cubrir consultas de L3
 --              Este script añade datos sin borrar los existentes de populate_db.sql
 -- Se incluye en: iissi1/labs/AN-B
 --
+
 USE grades_db;
 
 DELIMITER //

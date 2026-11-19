@@ -1,4 +1,13 @@
--- EL LABORATORIO " NO PIDE CREAR ESTE DOCUMENTO 
+--
+-- Autor: Javier Arroyo Marcos
+-- Fecha: 17/11
+-- Descripción: CONSULTAS
+-- Se incluye en: 
+--
+
+
+
+-- EL LABORATORIO "2" NO PIDE CREAR ESTE DOCUMENTO 
 
 -- Tabla People
 

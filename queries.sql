@@ -28,3 +28,35 @@ FROM subjects s;
 SELECT s.subject_name, s.acronym, s.subject_type
 FROM subjects s
 WHERE s.subject_type = 'Formación Básica';
+
+
+-- JOIN: -- JOIN:   SELECT columnas FROM tabla1 JOIN tabla2 ON tabla1.id = tabla2.id WHERE condiciones;
+
+-- 5
+SELECT p.first_name, p.last_name, st.access_method
+FROM students st
+JOIN people p ON st.student_id = p.person_id
+WHERE st.access_method = 'Selectividad';
+-- JOIN: uno la tabla people con la tabla q estoy trabajando(students) 
+    -- ON: bajo la condición que clave ajena = clave primaria
+
+    -- People
+-- person_id   first_name   last_name   
+-- 1            Ana          López
+-- 2           Carlos        Ruiz
+-- 3           Javi          Arroyo
+    -- Students
+-- student_id	    access_method
+-- 1	            Selectividad
+-- 3	            Grado Superior  
+    -- Unión
+-- first_name        last_name     access_method
+-- Ana              López          Selectividad
+-- Laura            Gómez          Grado Superior
+
+
+-- 6
+SELECT p.first_name, p.last_name, pr.category
+FROM professors pr
+JOIN people p ON pr.professor_id = p.person_id
+WHERE pr.category = 'Catedrático';
