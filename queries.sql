@@ -131,7 +131,7 @@ SELECT MIN(g.grade_value) AS min_grade
 FROM grades g;
 
 
--- Condiciones múltiples:
+-- CONDICIONES MÚLTIPLES:
 -- 13: OR
 SELECT g.grade_id, g.grade_value, g.exam_call
 FROM grades g
@@ -151,3 +151,22 @@ WHERE s.credits IN (6, 12);   -- Si el valor está en la lista dada
 SELECT p.first_name, p.last_name, p.age
 FROM people p
 WHERE p.age BETWEEN 20 AND 30;
+
+
+
+
+-- DISTINCT(eliminar elementos duplicados):     SELECT DISTINCT columnas FROM tabla WHERE condiciones;
+
+-- 17
+SELECT DISTINCT g.group_name 
+FROM groups g;
+
+-- 18
+SELECT DISTINCT s.subject_type
+FROM subjects s;
+
+
+-- 19
+SELECT DISTINCT g.academic_year
+FROM groups g
+ORDER BY g.academic_year DESC;      -- ASC es por defecto
