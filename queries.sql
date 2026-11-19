@@ -93,3 +93,61 @@ SELECT
 FROM students st
 JOIN people p ON st.student_id = p.person_id;
 ---------------------------------------------------------------------------------
+
+-- FUNCIONES AGREGADAS: SELECT FUNCION(columna) AS alias FROM tabla WHERE condiciones;
+
+-- 7
+SELECT AVG(g.grade_value) AS average_grade    -- AVG() promedio aritmético de los valores
+FROM grades g
+WHERE g.group_id = 1;
+
+-- 8
+SELECT SUM(s.credits) AS total_credits     -- SUM() suma todos los valores numéricos
+FROM subjects s 
+WHERE s.degree_id = 3;
+
+-- 9
+SELECT COUNT(*) AS total_students      -- COUNT(*) cuenta el número de filas
+FROM students;
+-- Sin WHERE, cuenta todas las filas de la tabla.
+-- total_students
+-- 120
+
+-- 10
+SELECT activity, COUNT(*) AS total_groups
+FROM groups
+GROUP BY activity;
+-- activity    total_groups
+-- Teoría      4
+-- Laboratorio 6
+
+
+-- 11
+SELECT MAX(g.grade_value) AS max_grade
+FROM grades g;
+
+-- 12
+SELECT MIN(g.grade_value) AS min_grade
+FROM grades g;
+
+
+-- Condiciones múltiples:
+-- 13: OR
+SELECT g.grade_id, g.grade_value, g.exam_call
+FROM grades g
+WHERE g.grade_value < 5 OR g.grade_value > 9;
+
+-- 14: BETWEEN (entre dos números)
+SELECT g.grade_id, g.grade_value, g.exam_call
+FROM grades g
+WHERE g.grade_value BETWEEN 5 AND 7;
+
+-- 15: IN 
+SELECT s.subject_name, s.credits
+FROM subjects s
+WHERE s.credits IN (6, 12);   -- Si el valor está en la lista dada
+
+-- 16: BETWEEN (entre dos números)
+SELECT p.first_name, p.last_name, p.age
+FROM people p
+WHERE p.age BETWEEN 20 AND 30;
