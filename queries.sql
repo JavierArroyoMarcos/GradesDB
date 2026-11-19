@@ -446,3 +446,83 @@ SELECT
     g.exam_call
 FROM v_students st
 LEFT JOIN grades g ON st.student_id = g.student_id;
+
+
+
+
+
+-- GROUP BY:    SELECT columna_grupo, FUNCION(col) AS alias FROM tabla WHERE condiciones GROUP BY columna_grupo;
+-- CON HAVING:  SELECT columna_grupo, FUNCION(col) AS alias FROM tabla WHERE condiciones GROUP BY columna_grupo HAVING FUNCION(col) condicion;
+
+-- 43
+SELECT 
+    st.first_name,
+    st.last_name,
+    AVG(g.grade_value) AS average_grade,
+    COUNT(*) AS total_grades
+FROM v_students st
+JOIN grades g ON st.student_id = g.student_id
+GROUP BY st.student_id, st.first_name, st.last_name;
+
+-- 44 
+SELECT 
+    st.access_method,
+    COUNT(*) AS total_students
+FROM students st
+GROUP BY st.access_method;
+
+-- 45
+SELECT 
+    d.degree_name,
+    COUNT(*) AS total_subjects
+FROM degrees d
+JOIN subjects s ON d.degree_id = s.degree_id
+GROUP BY d.degree_id, d.degree_name;
+
+-- 46
+SELECT 
+    s.subject_name,
+    s.acronym,
+    COUNT(*) AS total_groups
+FROM subjects s
+JOIN groups gr ON s.subject_id = gr.subject_id
+GROUP BY s.subject_id, s.subject_name, s.acronym;
+
+-- 47
+SELECT 
+    g.exam_call,
+    AVG(g.grade_value) AS average_grade,
+    COUNT(*) AS total_grades
+FROM grades g
+GROUP BY g.exam_call;
+
+-- 48 
+SELECT 
+    s.subject_name,
+    g.exam_call,
+    AVG(g.grade_value) AS average_grade,
+    COUNT(*) AS total_grades
+FROM grades g
+JOIN groups gr ON g.group_id = gr.group_id
+JOIN subjects s ON gr.subject_id = s.subject_id
+GROUP BY s.subject_id, s.subject_name, g.exam_call
+ORDER BY s.subject_name, g.exam_call;
+
+-- 49 COUNT DISTINCT
+SELECT 
+    gr.academic_year,
+    COUNT(DISTINCT ge.student_id) AS total_students   -- Cuenta cuántos valores únicos (sin repetir) hay en cada grupo
+FROM groups gr
+JOIN students_groups ge ON gr.group_id = ge.group_id
+GROUP BY gr.academic_year
+ORDER BY gr.academic_year DESC;
+
+-- 50
+SELECT 
+    pr.first_name,
+    pr.last_name,
+    pr.category,
+    SUM(tl.credits) AS total_credits
+FROM v_professors pr
+JOIN teaching_loads tl ON pr.professor_id = tl.professor_id
+GROUP BY pr.professor_id, pr.first_name, pr.last_name, pr.category;
