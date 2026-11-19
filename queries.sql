@@ -195,3 +195,32 @@ WHERE ge.group_id IN (      -- el SEGUNDO SELECT es para filtrar
 SELECT s.subject_name, s.credits
 FROM subjects s
 WHERE s.credits > (SELECT AVG(credits) FROM subjects);
+
+
+
+-- LIKE: SELECT columnas FROM tabla WHERE columna LIKE 'patron';
+-- %: Representa cero, uno o muchos caracteres cualesquiera.
+    -- 'A%' -> Empieza por A (Ana, Alberto, A).
+    -- '%ez' -> Termina en ez (López, Gómez).
+    -- '%an%' -> Contiene "an" en cualquier parte (Juan, Santiago, Ana).
+
+-- _: Representa un único carácter cualquiera.
+    -- 'A_a' -> Empieza por A, una letra cualquiera en medio, termina en a (Ana, Ada).
+
+-- Lo contrario es NOT LIKE
+
+
+-- 23: Termine en A
+SELECT p.first_name, p.last_name, p.dni
+FROM people p
+WHERE p.dni LIKE '%A';
+
+-- 24: Nombre empieza por 'Fundamentos'
+SELECT s.subject_name
+FROM subjects s
+WHERE s.subject_name LIKE 'Fundamentos%';
+
+-- 25: El nombre tenga 5 carácteres(da igual cuáles)
+SELECT p.first_name, p.last_name
+FROM people p
+WHERE p.first_name LIKE '_____';
