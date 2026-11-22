@@ -1,0 +1,6 @@
+--
+-- Autor: Javier Arroyo Marcos
+-- Fecha: 22/11
+-- Descripción: TRIGGERS
+-- Se incluye en: Lab 5
+--
