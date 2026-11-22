@@ -29,6 +29,10 @@
 
 
 
+
+
+-- TRIGGERS DE GRADES_DB -------------------------------------------------------------------
+
 -- Ej1: RN08: un alumno que accede por Selectividad debe tener al menos 16 años
 CREATE OR REPLACE TRIGGER t_biu_students_rn08
 BEFORE INSERT OR UPDATE ON students
