@@ -203,3 +203,29 @@ BEGIN
     CALL p_log_test('RN16', 'ERROR: Se permitió un curso fuera de rango', 'FAIL');
 END //
 DELIMITER ;
+-- ------------------------------------------------------------------------------------------------
+
+
+-- ORQUESTADOR DE RESTRICCIONES DECLARATIVAS --------------------------------------------------------
+DELIMITER //
+CREATE OR REPLACE PROCEDURE p_run_tests()
+BEGIN
+    DELETE FROM test_results;
+
+    CALL p_test_rn01_mh_requirement();
+    CALL p_test_rn09_not_null_attributes();
+    CALL p_test_rn10_subject_credits();
+    CALL p_test_rn11_grade_range();
+    CALL p_test_rn12_people_age();
+    CALL p_test_rn13_degree_years();
+    CALL p_test_rn14_dni_format();
+    CALL p_test_rn15_academic_year();
+    CALL p_test_rn16_course_range();
+
+    SELECT * FROM test_results ORDER BY execution_time, test_id;
+    SELECT test_status, COUNT(*) AS total FROM test_results GROUP BY test_status;
+END //
+DELIMITER ;
+
+CALL p_run_tests();
+-- -------------------------------------------------------------------------------------------
