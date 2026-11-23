@@ -12,7 +12,7 @@ DB_CONN = {
     "username": "iissi_user",
     "password": "iissi$user",
     #"database": "employees",
-    "database": "grades",  #usamos grandesno employees
+    "database": "grades_db",  #usamos grandesno employees
 }
 
 # The sequence of SQL scripts located in the sql/ folder that must

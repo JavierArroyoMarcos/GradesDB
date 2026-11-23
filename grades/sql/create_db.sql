@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS students_groups;
 
 DROP TABLE IF EXISTS grades;
 
-DROP TABLE IF EXISTS student_subjects;
+DROP TABLE IF EXISTS students_subjects;
 
 DROP TABLE IF EXISTS teaching_loads;
 SET FOREIGN_KEY_CHECKS = 1;

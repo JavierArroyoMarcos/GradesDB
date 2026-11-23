@@ -19,7 +19,7 @@ DELETE FROM grades;
 
 DELETE FROM students_subjects;
 
-DELETE FROM teaching_load;
+DELETE FROM teaching_loads;
 SET FOREIGN_KEY_CHECKS = 1;
 
 

@@ -61,7 +61,7 @@ FROM professors pr
 JOIN people p ON pr.professor_id = p.person_id
 WHERE pr.category = 'Catedrático';
 
------------------------------------ VISTAS ------------------------------------------
+-- --------------------------------- VISTAS ------------------------------------------
 -- Es una tabla virtual q funciona como accceso directo a un select guardado
 
 -- 1
@@ -92,7 +92,7 @@ SELECT
     p.email
 FROM students st
 JOIN people p ON st.student_id = p.person_id;
----------------------------------------------------------------------------------
+-- ------------------------------------------------------------------------------
 
 -- FUNCIONES AGREGADAS: SELECT FUNCION(columna) AS alias FROM tabla WHERE condiciones;
 
@@ -238,7 +238,7 @@ FROM groups g
 WHERE g.academic_year BETWEEN 2020 AND 2023
 ORDER BY g.academic_year;
 
---- -------------------------Vistas complejas---------------------------------------
+-- -------------------------Vistas complejas---------------------------------------
 -- 1
 CREATE OR REPLACE VIEW v_grades_with_honors AS
 SELECT g.grade_id, g.student_id, g.group_id, g.grade_value, g.exam_call

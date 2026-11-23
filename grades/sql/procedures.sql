@@ -41,13 +41,13 @@ DELIMITER ;
 -- Se crean al asignarle un valor
 -- Útil para pasar variables entre procedimientos
 
-SET @resultado = 100;  -- Asignar valor directamente
+-- SET @resultado = 100;  -- Asignar valor directamente
 
-SELECT AVG(grade_value) INTO @promedio_general FROM grades;  -- Asignar desde una consulta
+-- SELECT AVG(grade_value) INTO @promedio_general FROM grades;  -- Asignar desde una consulta
 
-CALL p_student_average(6, @promedio_estudiante);     -- Usar en procedimientos
+-- CALL p_student_average(6, @promedio_estudiante);     -- Usar en procedimientos
 
-SELECT @promedio_estudiante;   -- Consultar el valor
+-- SELECT @promedio_estudiante;   -- Consultar el valor
 
 
 
