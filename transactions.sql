@@ -80,3 +80,74 @@ SET AUTOCOMMIT = 1;  -- Dejo encendido elautoguardado para futuras operaciones
 SELECT * FROM grades 
 WHERE student_id = 6 AND exam_call = 'Extraordinaria';
 -- debe salir el valor
+
+
+
+
+
+
+
+
+
+-- ERRORES 
+
+
+CALL p_populate();
+
+START TRANSACTION;  
+-- Da error solamente una(la 3ra), si una da error sigue con el resto
+INSERT INTO grades (student_id, group_id, grade_value, exam_call, with_honors)
+VALUES (6, 1, 4.5, 'Extraordinaria', 0);
+INSERT INTO grades (student_id, group_id, grade_value, exam_call, with_honors)
+VALUES (7, 1, 7.5, 'Extraordinaria', 0);
+INSERT INTO grades (student_id, group_id, grade_value, exam_call, with_honors)
+VALUES (8, 1, -7.5, 'Extraordinaria', 0);
+
+COMMIT;
+
+
+
+SELECT * FROM grades    -- Quedan las dos primeras notas
+WHERE student_id IN (6, 7, 8) AND exam_call = 'Extraordinaria';
+
+
+
+
+
+
+
+
+
+
+-- Este código hace TODO O NADA: 
+CALL p_populate();
+
+DELIMITER //
+BEGIN NOT ATOMIC            -- BLOQUE ATÓMICO
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION   -- SI HAY ALGÚN ERROR SALE INMEDIATAMENTE
+    BEGIN
+        ROLLBACK;  -- DESHACE TODO
+        RESIGNAL;  -- LANZA LA SEÑAL DE ERROR
+    END;
+
+    START TRANSACTION;
+
+    INSERT INTO grades (student_id, group_id, grade_value, exam_call, with_honors)
+    VALUES (6, 1, 4.5, 'Extraordinaria', 0);
+    INSERT INTO grades (student_id, group_id, grade_value, exam_call, with_honors)
+    VALUES (7, 1, 7.5, 'Extraordinaria', 0);
+    INSERT INTO grades (student_id, group_id, grade_value, exam_call, with_honors)
+    VALUES (8, 1, -7.5, 'Extraordinaria', 0);
+
+    COMMIT;
+END //
+DELIMITER ;
+
+
+
+SELECT * FROM grades     -- No queda ninguna de las tres notas
+WHERE student_id IN (6, 7, 8) AND exam_call = 'Extraordinaria';
+
+
+
+
