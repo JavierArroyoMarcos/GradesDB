@@ -598,7 +598,7 @@ WHERE gr.academic_year = 2024
 GROUP BY s.subject_id, s.subject_name
 ORDER BY total_students DESC, s.subject_name ASC
 LIMIT 3;
--- Secuencia: FROM → WHERE → GROUP BY → ORDER BY → LIMIT
+-- Secuencia: FROM -> WHERE -> GROUP BY -> ORDER BY -> LIMIT
 
 -- 56
 SELECT 
