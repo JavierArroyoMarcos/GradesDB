@@ -11,15 +11,26 @@ DB_CONN = {
     "port": 3306,
     "username": "iissi_user",
     "password": "iissi$user",
-    "database": "employees",
+    #"database": "employees",
+    "database": "grades",  #usamos grandesno employees
 }
 
 # The sequence of SQL scripts located in the sql/ folder that must
 # be ran when the 'silence createdb' command is issued
+# SQL_SCRIPTS = [
+#     "create_tables.sql",
+#     # "create_views.sql",
+#     "populate_database.sql",
+# ]
+
 SQL_SCRIPTS = [
-    "create_tables.sql",
-    # "create_views.sql",
-    "populate_database.sql",
+    "create_db.sql",
+    "populate_db.sql",
+    "populate_db2.sql",
+    "auth.sql",
+    "functions.sql",
+    "procedures.sql",
+    "triggers.sql",
 ]
 
 # The port in which the API and the web server will be deployed
@@ -30,7 +41,8 @@ API_PREFIX = "/api/v1"
 
 # Table and fields that are used for both login and register
 USER_AUTH_DATA = {
-    "table": "Employees",
+    # "table": "Employees",
+    "table": "people",
     "identifier": "email",
     "password": "password",
 }

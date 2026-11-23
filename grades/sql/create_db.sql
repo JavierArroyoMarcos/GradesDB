@@ -8,19 +8,19 @@
 SET FOREIGN_KEY_CHECKS = 0; -- Interruptor para q las tablas se puedan borrar sin problemas
 DROP TABLE IF EXISTS people; -- Elimina la tabla si ya existía 
 DROP TABLE IF EXISTS professors;  -- Primero se pone la tabla principal y después la secundaria
-DROP TABLE IF EXITSTS students;
+DROP TABLE IF EXISTS students;
 
-DROP TABLE IF EXITSTS degrees;
-DROP TABLE IF EXITSTS subjects;
+DROP TABLE IF EXISTS degrees;
+DROP TABLE IF EXISTS subjects;
 
-DROP TABLE IF EXITSTS groups;
-DROP TABLE IF EXITSTS students_groups;
+DROP TABLE IF EXISTS groups;
+DROP TABLE IF EXISTS students_groups;
 
-DROP TABLE IF EXITSTS grades;
+DROP TABLE IF EXISTS grades;
 
-DROP TABLE IF EXITSTS student_subject;
+DROP TABLE IF EXISTS student_subjects;
 
-DROP TABLE IF EXITSTS teaching_load;
+DROP TABLE IF EXISTS teaching_loads;
 SET FOREIGN_KEY_CHECKS = 1;
 -- ---------------------------------PERSONAS ------------------------------------------------
 CREATE TABLE people (       
@@ -145,7 +145,7 @@ CREATE TABLE teaching_loads (
 
 
 -- ------------------ LAB 2: -------------------------------------------------------------------
-------------------- RESTRICCIONES ---------------------------------------------------------------
+-- ----------------- RESTRICCIONES ---------------------------------------------------------------
 ALTER TABLE people
     ADD CONSTRAINT ck_people_rn12_age CHECK (age BETWEEN 16 AND 70),  -- edad en ese rango
     ADD CONSTRAINT ck_people_rn14_dni CHECK (dni REGEXP '^[0-9]{8}[A-Za-z]$'), -- dni REGEXP: dni debe de cumplir con una expresión regular(REGEXP)
@@ -170,11 +170,6 @@ ALTER TABLE students
         access_method IN ('Selectividad','Ciclo','Mayor','Titulado','Extranjero')
     );    -- Solamente puede haber esas categorías
 
-ALTER TABLE students
-    ADD CONSTRAINT ck_students_access_method CHECK (
-        access_method IN ('Selectividad','Ciclo','Mayor','Titulado','Extranjero')
-    );
-
 ALTER TABLE degrees
     ADD CONSTRAINT ck_degrees_rn13_duration CHECK (duration_years BETWEEN 3 AND 6), -- Duración sea entre 3 y 6
     ADD CONSTRAINT uq_degrees_name UNIQUE (degree_name); -- No dos grados con el mismo nombre
@@ -194,6 +189,7 @@ ALTER TABLE groups
 ALTER TABLE teaching_loads
     ADD CONSTRAINT ck_teaching_loads_credits CHECK (credits > 0);  -- Créditos positivos
 
+ALTER TABLE grades
     ADD CONSTRAINT ck_grades_rn11_value CHECK (grade_value BETWEEN 0 AND 10),
     ADD CONSTRAINT ck_grades_rn01_with_honors CHECK (with_honors = 0 OR grade_value >= 9), -- matricula de honor con un 9 o más
     ADD CONSTRAINT ck_grades_exam_call CHECK (exam_call IN ('Primera','Segunda','Tercera','Extraordinaria'));
