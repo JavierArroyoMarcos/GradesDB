@@ -304,8 +304,53 @@ CALL p_populate();
 
 -- El grado es nuevo, pero el acrónimo FP ya es de Fundamentos de Programación
 CALL p_insert_degree_subject('Grado en Ciberseguridad',4,'Redes Neuronales','FP',  6,3,'Obligatoria');
--- FP es un acrónimo repetido
 
 SELECT * FROM degrees WHERE degree_name = 'Grado en Ciberseguridad';   -- El grado queda insertado, aunque su asignatura no se haya creado
 SELECT * FROM subjects WHERE subject_name = 'Redes Neuronales';
 
+
+
+
+-- Con trasacción: 
+
+CREATE OR REPLACE PROCEDURE p_insert_degree_subject_transactional(
+    IN p_degree_name VARCHAR(80),
+    IN p_degree_years TINYINT,
+    IN p_subject_name VARCHAR(120),
+    IN p_subject_acronym VARCHAR(12),
+    IN p_subject_credits TINYINT,
+    IN p_subject_course TINYINT,
+    IN p_subject_type VARCHAR(30)
+)
+BEGIN
+-- Envoltorio de seguridad: 
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION   
+    BEGIN
+        ROLLBACK;  -- Si algo falla, deshace todo
+        RESIGNAL;  -- Mostrar el error
+    END;
+
+    START TRANSACTION;   -- Abre la nueva trasacción, una nueva caja para meter los datos
+    CALL p_insert_degree_subject(p_degree_name, p_degree_years, p_subject_name, p_subject_acronym, p_subject_credits, p_subject_course, p_subject_type);
+        -- Cuando falla el INSERT de la asignatura: el error salta hacia fuera, lo atrapa el HANDLER, ejecuta ROLLBACK; (borrando también el grado que se acababa de crear) y muestra el error por pantalla RESIGNAL;
+    COMMIT;
+END //
+
+
+-- Probar con datos válidos:
+CALL p_populate();
+
+-- El grado es nuevo, pero el acrónimo FP ya es de Fundamentos de Programación
+CALL p_insert_degree_subject_transactional('Grado en Inteligencia Artificial', 4, 'Aprendizaje Automático', 'AA', 6, 3, 'Obligatoria');
+
+SELECT * FROM degrees WHERE degree_name = 'Grado en Inteligencia Artificial';
+SELECT * FROM subjects WHERE acronym = 'AA';
+
+
+-- Probar con datos erróneos:
+CALL p_populate();
+
+CALL p_insert_degree_subject_transactional( 'Grado en Ciberseguridad', 4, 'Redes Neuronales', 'FP',  6, 3, 'Obligatoria');
+
+SELECT * FROM degrees WHERE degree_name = 'Grado en Ciberseguridad';
+SELECT * FROM subjects WHERE subject_name = 'Redes Neuronales';
