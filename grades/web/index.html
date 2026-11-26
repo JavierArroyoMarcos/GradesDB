@@ -1,47 +1,44 @@
-<!doctype HTML>
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="images/favicon.ico">
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
-
-    <script src="js/libs/bootstrap.min.js"></script>
-    <script src="js/libs/axios.min.js"></script>
-    <script src="js/utils/include.js"></script>
-
-    <title>Sample project</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My application</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="ez-ui/css/ez-ui.css">
+  <link rel="stylesheet" href="css/app.css">
 </head>
-
 <body>
-    <div id="page-header"></div>
+  <main class="ez-container">
+    <h1>My application</h1>
+    <p>A project created with <code>silence new</code>. Silence serves this web app at <code>/</code>, the
+      API at <code>/api</code> and the admin panel at <code>/admin/</code>.</p>
+    <p>
+      <a class="ez-button" href="/admin/">Admin panel</a>
+      <a class="ez-button ez-button--secondary" href="/api">API</a>
+    </p>
 
-    <div class="container">
-        <div class="row" id="errors"></div>
+    <h2>Where things are</h2>
+    <ul>
+      <li><code>web/</code>: the pages of this web app, starting with this <code>index.html</code>.</li>
+      <li><code>web/css/app.css</code>: your own styles, after the ones of ez-ui (<code>web/ez-ui/</code>,
+        which is not modified).</li>
+      <li><code>web/js/</code>: your JavaScript, in <code>renderers/</code> (what builds HTML, and
+        <code>messages.js</code>), <code>utils/</code> (<code>session.js</code>…), <code>validators/</code> and
+        <code>libs/</code> (axios); and <code>api/_auto/</code>, the JS API that Silence generates with the
+        endpoints, to call them from your pages.</li>
+      <li><code>sql/</code>: the scripts that create the database and load its data.</li>
+    </ul>
 
-        <h1>Employees:</h1>
-        <div id="employees"></div>
+    <h2>Next steps</h2>
+    <p>In the admin panel: connect to the database and load it, generate the endpoints, give each one its
+      access and run their tests. Then replace this page with the first one of your app.</p>
 
-        <h1>Departments:</h1>
-        <a id="new-dpmt-button" class="btn btn-primary btn-sm" href="create_department.html">Create a new department</a>
-        <div id="departments"></div>
-        
-    </div>
-
-    <div id="page-footer"></div>
-
-    <script>
-        include("header.html", "#page-header");
-        include("footer.html", "#page-footer");
-    </script>
-
-    <script type="module" src="js/header.js"></script>
-    <script type="module" src="js/index.js"></script>
-
+    <h2>Documentation</h2>
+    <ul>
+      <li><a href="https://github.com/DEAL-US/Silence/wiki">Silence's wiki</a></li>
+      <li><a href="https://iissi-us.github.io/ez-ui/en/">ez-ui</a>: its classes, components and JavaScript.</li>
+    </ul>
+  </main>
 </body>
-
 </html>

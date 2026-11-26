@@ -1,0 +1,70 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'people'",
+        "route": "/people",
+        "method": "GET",
+        "sql": "SELECT * FROM people",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'people' by its primary key",
+        "route": "/people/$person_id",
+        "method": "GET",
+        "sql": "SELECT * FROM people WHERE person_id = $person_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'people'",
+        "route": "/people",
+        "method": "POST",
+        "sql": "INSERT INTO people(dni, first_name, last_name, age, email, password, role) VALUES ($dni, $first_name, $last_name, $age, $email, $password, $role)",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "dni",
+            "first_name",
+            "last_name",
+            "age",
+            "email",
+            "password",
+            "role"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'people' by its primary key",
+        "route": "/people/$person_id",
+        "method": "PUT",
+        "sql": "UPDATE people SET dni = $dni, first_name = $first_name, last_name = $last_name, age = $age, email = $email, password = $password, role = $role WHERE person_id = $person_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "dni",
+            "first_name",
+            "last_name",
+            "age",
+            "email",
+            "password",
+            "role"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'people' by its primary key",
+        "route": "/people/$person_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM people WHERE person_id = $person_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

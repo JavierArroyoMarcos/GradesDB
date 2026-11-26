@@ -1,0 +1,62 @@
+{
+    "students_getAll_ok": {
+        "description": "GET /students: returns the current rows",
+        "endpoint": "GET /students",
+        "GET /students": null,
+        "expect": 200
+    },
+    "students_create_ok": {
+        "description": "POST /students: creates a row",
+        "endpoint": "POST /students",
+        "POST /students": {
+            "student_id": 1,
+            "access_method": "Selectividad"
+        },
+        "expect": 201
+    },
+    "students_create_missing_param": {
+        "description": "POST /students: without 'student_id' is a 400",
+        "endpoint": "POST /students",
+        "POST /students": {
+            "access_method": "Selectividad"
+        },
+        "expect": {
+            "status": 400,
+            "message": "student_id"
+        }
+    },
+    "students_delete_not_found": {
+        "description": "DELETE /students/$student_id: a row that does not exist is a 404",
+        "endpoint": "DELETE /students/$student_id",
+        "DELETE /students/999999999": null,
+        "expect": 404
+    },
+    "students_getById_ok": {
+        "description": "GET /students/$student_id: returns the current rows",
+        "endpoint": "GET /students/$student_id",
+        "GET /students/6": null,
+        "expect": 200
+    },
+    "students_getById_not_found": {
+        "description": "GET /students/$student_id: a row that does not exist is a 404",
+        "endpoint": "GET /students/$student_id",
+        "GET /students/999999999": null,
+        "expect": 404
+    },
+    "students_update_ok": {
+        "description": "PUT /students/$student_id: updates a row (with its current values)",
+        "endpoint": "PUT /students/$student_id",
+        "PUT /students/6": {
+            "access_method": "Selectividad"
+        },
+        "expect": 200
+    },
+    "students_update_not_found": {
+        "description": "PUT /students/$student_id: a row that does not exist is a 404",
+        "endpoint": "PUT /students/$student_id",
+        "PUT /students/999999999": {
+            "access_method": "Selectividad"
+        },
+        "expect": 404
+    }
+}

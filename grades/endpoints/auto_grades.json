@@ -1,0 +1,66 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'grades'",
+        "route": "/grades",
+        "method": "GET",
+        "sql": "SELECT * FROM grades",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'grades' by its primary key",
+        "route": "/grades/$grade_id",
+        "method": "GET",
+        "sql": "SELECT * FROM grades WHERE grade_id = $grade_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'grades'",
+        "route": "/grades",
+        "method": "POST",
+        "sql": "INSERT INTO grades(student_id, group_id, grade_value, exam_call, with_honors) VALUES ($student_id, $group_id, $grade_value, $exam_call, $with_honors)",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "student_id",
+            "group_id",
+            "grade_value",
+            "exam_call",
+            "with_honors"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'grades' by its primary key",
+        "route": "/grades/$grade_id",
+        "method": "PUT",
+        "sql": "UPDATE grades SET student_id = $student_id, group_id = $group_id, grade_value = $grade_value, exam_call = $exam_call, with_honors = $with_honors WHERE grade_id = $grade_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "student_id",
+            "group_id",
+            "grade_value",
+            "exam_call",
+            "with_honors"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'grades' by its primary key",
+        "route": "/grades/$grade_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM grades WHERE grade_id = $grade_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

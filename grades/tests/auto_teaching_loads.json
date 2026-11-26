@@ -1,0 +1,74 @@
+{
+    "teaching_loads_getAll_ok": {
+        "description": "GET /teaching_loads: returns the current rows",
+        "endpoint": "GET /teaching_loads",
+        "GET /teaching_loads": null,
+        "expect": 200
+    },
+    "teaching_loads_create_ok": {
+        "description": "POST /teaching_loads: creates a row",
+        "endpoint": "POST /teaching_loads",
+        "POST /teaching_loads": {
+            "professor_id": 1,
+            "group_id": 5,
+            "credits": "3.0"
+        },
+        "expect": 201
+    },
+    "teaching_loads_create_missing_param": {
+        "description": "POST /teaching_loads: without 'professor_id' is a 400",
+        "endpoint": "POST /teaching_loads",
+        "POST /teaching_loads": {
+            "group_id": 5,
+            "credits": "3.0"
+        },
+        "expect": {
+            "status": 400,
+            "message": "professor_id"
+        }
+    },
+    "teaching_loads_delete_not_found": {
+        "description": "DELETE /teaching_loads/$teaching_load_id: a row that does not exist is a 404",
+        "endpoint": "DELETE /teaching_loads/$teaching_load_id",
+        "DELETE /teaching_loads/999999999": null,
+        "expect": 404
+    },
+    "teaching_loads_delete_ok": {
+        "description": "DELETE /teaching_loads/$teaching_load_id: deletes a row that no other row references",
+        "endpoint": "DELETE /teaching_loads/$teaching_load_id",
+        "DELETE /teaching_loads/1": null,
+        "expect": 200
+    },
+    "teaching_loads_getById_ok": {
+        "description": "GET /teaching_loads/$teaching_load_id: returns the current rows",
+        "endpoint": "GET /teaching_loads/$teaching_load_id",
+        "GET /teaching_loads/1": null,
+        "expect": 200
+    },
+    "teaching_loads_getById_not_found": {
+        "description": "GET /teaching_loads/$teaching_load_id: a row that does not exist is a 404",
+        "endpoint": "GET /teaching_loads/$teaching_load_id",
+        "GET /teaching_loads/999999999": null,
+        "expect": 404
+    },
+    "teaching_loads_update_ok": {
+        "description": "PUT /teaching_loads/$teaching_load_id: updates a row (with its current values)",
+        "endpoint": "PUT /teaching_loads/$teaching_load_id",
+        "PUT /teaching_loads/1": {
+            "professor_id": 1,
+            "group_id": 1,
+            "credits": "3.0"
+        },
+        "expect": 200
+    },
+    "teaching_loads_update_not_found": {
+        "description": "PUT /teaching_loads/$teaching_load_id: a row that does not exist is a 404",
+        "endpoint": "PUT /teaching_loads/$teaching_load_id",
+        "PUT /teaching_loads/999999999": {
+            "professor_id": 1,
+            "group_id": 1,
+            "credits": "3.0"
+        },
+        "expect": 404
+    }
+}

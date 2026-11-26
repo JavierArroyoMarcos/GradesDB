@@ -1,52 +1,35 @@
 "use strict";
 
-// Time in seconds during which the session token is valid
-const TOKEN_VALIDITY_TIME = 86400;
-
+// La sesión del usuario en el navegador: el token que devuelve POST /api/login y los datos del
+// usuario, en sessionStorage (se borran al cerrar la pestaña). La API JS que genera Silence
+// (js/api/_auto/common.js) envía ese mismo token, con la clave "token", en cada petición.
 const sessionManager = {
+  // Guarda la sesión: el token y el usuario de la respuesta del login
+  login: function (token, user) {
+    sessionStorage.setItem("token", token);
+    sessionStorage.setItem("user", JSON.stringify(user));
+  },
 
-    login: function (sessionToken, userData) {
-        localStorage.setItem("sessionToken", sessionToken);
-        localStorage.setItem("sessionTokenTime", new Date().getTime());
-        localStorage.setItem("loggedUserData", JSON.stringify(userData));
-    },
+  // Borra la sesión del navegador
+  logout: function () {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+  },
 
-    logout: function () {
-        localStorage.removeItem("sessionToken");
-        localStorage.removeItem("sessionTokenTime");
-        localStorage.removeItem("loggedUserData");
-    },
+  // El token de la sesión, o null si no hay sesión
+  getToken: function () {
+    return sessionStorage.getItem("token");
+  },
 
-    getToken: function () {
-        let token = localStorage.getItem("sessionToken");
+  // Si hay una sesión iniciada
+  isLogged: function () {
+    return this.getToken() !== null;
+  },
 
-        // Logout if the token has expired
-        if (token !== null) {
-            let currentDate = new Date().getTime();
-            let tokenDate = localStorage.getItem("sessionTokenTime");
-            let diff = currentDate - tokenDate;
-
-            if (diff > TOKEN_VALIDITY_TIME * 1000) {
-                console.error("The session has expired, logging out.");
-                this.logout();
-                token = null;
-            }
-        }
-
-        return token;
-    },
-
-    isLogged: function () {
-        return this.getToken() !== null;
-    },
-
-    getLoggedUser: function () {
-        return JSON.parse(localStorage.getItem("loggedUserData"));
-    },
-
-    getLoggedId: function () {
-        return this.isLogged() ? this.getLoggedUser().userId : null;
-    }
+  // Los datos del usuario de la sesión (su fila, sin la contraseña), o null si no hay sesión
+  getUser: function () {
+    return JSON.parse(sessionStorage.getItem("user"));
+  },
 };
 
 export { sessionManager };

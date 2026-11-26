@@ -1,0 +1,70 @@
+{
+    "students_groups_getAll_ok": {
+        "description": "GET /students_groups: returns the current rows",
+        "endpoint": "GET /students_groups",
+        "GET /students_groups": null,
+        "expect": 200
+    },
+    "students_groups_create_ok": {
+        "description": "POST /students_groups: creates a row",
+        "endpoint": "POST /students_groups",
+        "POST /students_groups": {
+            "student_id": 6,
+            "group_id": 6
+        },
+        "expect": 201
+    },
+    "students_groups_create_missing_param": {
+        "description": "POST /students_groups: without 'student_id' is a 400",
+        "endpoint": "POST /students_groups",
+        "POST /students_groups": {
+            "group_id": 6
+        },
+        "expect": {
+            "status": 400,
+            "message": "student_id"
+        }
+    },
+    "students_groups_delete_not_found": {
+        "description": "DELETE /students_groups/$student_group_id: a row that does not exist is a 404",
+        "endpoint": "DELETE /students_groups/$student_group_id",
+        "DELETE /students_groups/999999999": null,
+        "expect": 404
+    },
+    "students_groups_delete_ok": {
+        "description": "DELETE /students_groups/$student_group_id: deletes a row that no other row references",
+        "endpoint": "DELETE /students_groups/$student_group_id",
+        "DELETE /students_groups/1": null,
+        "expect": 200
+    },
+    "students_groups_getById_ok": {
+        "description": "GET /students_groups/$student_group_id: returns the current rows",
+        "endpoint": "GET /students_groups/$student_group_id",
+        "GET /students_groups/1": null,
+        "expect": 200
+    },
+    "students_groups_getById_not_found": {
+        "description": "GET /students_groups/$student_group_id: a row that does not exist is a 404",
+        "endpoint": "GET /students_groups/$student_group_id",
+        "GET /students_groups/999999999": null,
+        "expect": 404
+    },
+    "students_groups_update_ok": {
+        "description": "PUT /students_groups/$student_group_id: updates a row (with its current values)",
+        "endpoint": "PUT /students_groups/$student_group_id",
+        "PUT /students_groups/1": {
+            "student_id": 6,
+            "group_id": 1
+        },
+        "expect": 200
+    },
+    "students_groups_update_not_found": {
+        "description": "PUT /students_groups/$student_group_id: a row that does not exist is a 404",
+        "endpoint": "PUT /students_groups/$student_group_id",
+        "PUT /students_groups/999999999": {
+            "student_id": 6,
+            "group_id": 1
+        },
+        "expect": 404
+    }
+}

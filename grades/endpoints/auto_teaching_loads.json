@@ -1,0 +1,62 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'teaching_loads'",
+        "route": "/teaching_loads",
+        "method": "GET",
+        "sql": "SELECT * FROM teaching_loads",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'teaching_loads' by its primary key",
+        "route": "/teaching_loads/$teaching_load_id",
+        "method": "GET",
+        "sql": "SELECT * FROM teaching_loads WHERE teaching_load_id = $teaching_load_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'teaching_loads'",
+        "route": "/teaching_loads",
+        "method": "POST",
+        "sql": "INSERT INTO teaching_loads(professor_id, group_id, credits) VALUES ($professor_id, $group_id, $credits)",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "professor_id",
+            "group_id",
+            "credits"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'teaching_loads' by its primary key",
+        "route": "/teaching_loads/$teaching_load_id",
+        "method": "PUT",
+        "sql": "UPDATE teaching_loads SET professor_id = $professor_id, group_id = $group_id, credits = $credits WHERE teaching_load_id = $teaching_load_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "professor_id",
+            "group_id",
+            "credits"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'teaching_loads' by its primary key",
+        "route": "/teaching_loads/$teaching_load_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM teaching_loads WHERE teaching_load_id = $teaching_load_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

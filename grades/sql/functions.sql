@@ -32,7 +32,7 @@
 -- END //
 -- DELIMITER ;
 
-
+DELIMITER //
 -- EJ1: Función para calcular nota media de un estudiante
 -- Devuelve la nota media del alumno (0 si no tiene notas)
 CREATE OR REPLACE FUNCTION f_student_average(
@@ -144,4 +144,8 @@ BEGIN
     -- RN04: como máximo un grupo de cada actividad (teoría o laboratorio)
     RETURN v_count >= 1;
 END//
+
+
+
+DELIMITER ;
 

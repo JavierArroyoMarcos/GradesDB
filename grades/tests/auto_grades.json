@@ -1,0 +1,82 @@
+{
+    "grades_getAll_ok": {
+        "description": "GET /grades: returns the current rows",
+        "endpoint": "GET /grades",
+        "GET /grades": null,
+        "expect": 200
+    },
+    "grades_create_ok": {
+        "description": "POST /grades: creates a row",
+        "endpoint": "POST /grades",
+        "POST /grades": {
+            "student_id": 6,
+            "group_id": 1,
+            "grade_value": "9.80",
+            "exam_call": "Primera",
+            "with_honors": 1
+        },
+        "expect": 201
+    },
+    "grades_create_missing_param": {
+        "description": "POST /grades: without 'student_id' is a 400",
+        "endpoint": "POST /grades",
+        "POST /grades": {
+            "group_id": 1,
+            "grade_value": "9.80",
+            "exam_call": "Primera",
+            "with_honors": 1
+        },
+        "expect": {
+            "status": 400,
+            "message": "student_id"
+        }
+    },
+    "grades_delete_not_found": {
+        "description": "DELETE /grades/$grade_id: a row that does not exist is a 404",
+        "endpoint": "DELETE /grades/$grade_id",
+        "DELETE /grades/999999999": null,
+        "expect": 404
+    },
+    "grades_delete_ok": {
+        "description": "DELETE /grades/$grade_id: deletes a row that no other row references",
+        "endpoint": "DELETE /grades/$grade_id",
+        "DELETE /grades/1": null,
+        "expect": 200
+    },
+    "grades_getById_ok": {
+        "description": "GET /grades/$grade_id: returns the current rows",
+        "endpoint": "GET /grades/$grade_id",
+        "GET /grades/1": null,
+        "expect": 200
+    },
+    "grades_getById_not_found": {
+        "description": "GET /grades/$grade_id: a row that does not exist is a 404",
+        "endpoint": "GET /grades/$grade_id",
+        "GET /grades/999999999": null,
+        "expect": 404
+    },
+    "grades_update_ok": {
+        "description": "PUT /grades/$grade_id: updates a row (with its current values)",
+        "endpoint": "PUT /grades/$grade_id",
+        "PUT /grades/1": {
+            "student_id": 6,
+            "group_id": 1,
+            "grade_value": "9.80",
+            "exam_call": "Primera",
+            "with_honors": 1
+        },
+        "expect": 200
+    },
+    "grades_update_not_found": {
+        "description": "PUT /grades/$grade_id: a row that does not exist is a 404",
+        "endpoint": "PUT /grades/$grade_id",
+        "PUT /grades/999999999": {
+            "student_id": 6,
+            "group_id": 1,
+            "grade_value": "9.80",
+            "exam_call": "Primera",
+            "with_honors": 1
+        },
+        "expect": 404
+    }
+}

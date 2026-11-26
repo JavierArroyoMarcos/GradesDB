@@ -1,0 +1,64 @@
+{
+    "degrees_getAll_ok": {
+        "description": "GET /degrees: returns the current rows",
+        "endpoint": "GET /degrees",
+        "GET /degrees": null,
+        "expect": 200
+    },
+    "degrees_create_ok": {
+        "description": "POST /degrees: creates a row",
+        "endpoint": "POST /degrees",
+        "POST /degrees": {
+            "degree_name": "Ingeniería del Software-t1",
+            "duration_years": 4
+        },
+        "expect": 201
+    },
+    "degrees_create_missing_param": {
+        "description": "POST /degrees: without 'degree_name' is a 400",
+        "endpoint": "POST /degrees",
+        "POST /degrees": {
+            "duration_years": 4
+        },
+        "expect": {
+            "status": 400,
+            "message": "degree_name"
+        }
+    },
+    "degrees_delete_not_found": {
+        "description": "DELETE /degrees/$degree_id: a row that does not exist is a 404",
+        "endpoint": "DELETE /degrees/$degree_id",
+        "DELETE /degrees/999999999": null,
+        "expect": 404
+    },
+    "degrees_getById_ok": {
+        "description": "GET /degrees/$degree_id: returns the current rows",
+        "endpoint": "GET /degrees/$degree_id",
+        "GET /degrees/1": null,
+        "expect": 200
+    },
+    "degrees_getById_not_found": {
+        "description": "GET /degrees/$degree_id: a row that does not exist is a 404",
+        "endpoint": "GET /degrees/$degree_id",
+        "GET /degrees/999999999": null,
+        "expect": 404
+    },
+    "degrees_update_ok": {
+        "description": "PUT /degrees/$degree_id: updates a row (with its current values)",
+        "endpoint": "PUT /degrees/$degree_id",
+        "PUT /degrees/1": {
+            "degree_name": "Ingeniería del Software",
+            "duration_years": 4
+        },
+        "expect": 200
+    },
+    "degrees_update_not_found": {
+        "description": "PUT /degrees/$degree_id: a row that does not exist is a 404",
+        "endpoint": "PUT /degrees/$degree_id",
+        "PUT /degrees/999999999": {
+            "degree_name": "Ingeniería del Software",
+            "duration_years": 4
+        },
+        "expect": 404
+    }
+}

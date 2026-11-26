@@ -1,0 +1,70 @@
+{
+    "students_subjects_getAll_ok": {
+        "description": "GET /students_subjects: returns the current rows",
+        "endpoint": "GET /students_subjects",
+        "GET /students_subjects": null,
+        "expect": 200
+    },
+    "students_subjects_create_ok": {
+        "description": "POST /students_subjects: creates a row",
+        "endpoint": "POST /students_subjects",
+        "POST /students_subjects": {
+            "student_id": 6,
+            "subject_id": 18
+        },
+        "expect": 201
+    },
+    "students_subjects_create_missing_param": {
+        "description": "POST /students_subjects: without 'student_id' is a 400",
+        "endpoint": "POST /students_subjects",
+        "POST /students_subjects": {
+            "subject_id": 18
+        },
+        "expect": {
+            "status": 400,
+            "message": "student_id"
+        }
+    },
+    "students_subjects_delete_not_found": {
+        "description": "DELETE /students_subjects/$student_subject_id: a row that does not exist is a 404",
+        "endpoint": "DELETE /students_subjects/$student_subject_id",
+        "DELETE /students_subjects/999999999": null,
+        "expect": 404
+    },
+    "students_subjects_delete_ok": {
+        "description": "DELETE /students_subjects/$student_subject_id: deletes a row that no other row references",
+        "endpoint": "DELETE /students_subjects/$student_subject_id",
+        "DELETE /students_subjects/1": null,
+        "expect": 200
+    },
+    "students_subjects_getById_ok": {
+        "description": "GET /students_subjects/$student_subject_id: returns the current rows",
+        "endpoint": "GET /students_subjects/$student_subject_id",
+        "GET /students_subjects/1": null,
+        "expect": 200
+    },
+    "students_subjects_getById_not_found": {
+        "description": "GET /students_subjects/$student_subject_id: a row that does not exist is a 404",
+        "endpoint": "GET /students_subjects/$student_subject_id",
+        "GET /students_subjects/999999999": null,
+        "expect": 404
+    },
+    "students_subjects_update_ok": {
+        "description": "PUT /students_subjects/$student_subject_id: updates a row (with its current values)",
+        "endpoint": "PUT /students_subjects/$student_subject_id",
+        "PUT /students_subjects/1": {
+            "student_id": 6,
+            "subject_id": 11
+        },
+        "expect": 200
+    },
+    "students_subjects_update_not_found": {
+        "description": "PUT /students_subjects/$student_subject_id: a row that does not exist is a 404",
+        "endpoint": "PUT /students_subjects/$student_subject_id",
+        "PUT /students_subjects/999999999": {
+            "student_id": 6,
+            "subject_id": 11
+        },
+        "expect": 404
+    }
+}

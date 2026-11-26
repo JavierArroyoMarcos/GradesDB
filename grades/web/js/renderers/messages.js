@@ -1,46 +1,40 @@
 "use strict";
 
-import { parseHTML } from "/js/utils/parseHTML.js";
-
-// Aux function to get the div in which to display messages
-// It's centralized here so we can change it easily in the case its ID changes
-const msgsDivID = "errors";
-
-function getErrorsDiv() {
-    return document.getElementById(msgsDivID);
-}
+// Mensajes para el usuario, con las notificaciones y las alertas de ez-ui.
+import { ezToast } from "../../ez-ui/js/toast.js";
 
 const messageRenderer = {
+  // Una notificación de éxito, que se cierra sola
+  showSuccessMessage: function (message) {
+    ezToast(message, "success");
+  },
 
-    showMessageAsAlert: function (message, bootClass) {
-        let html = `<div class="alert alert-${bootClass} alert-dismissible col-md-12">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        ${message}
-                    </div>`;
-        let errorsDiv = getErrorsDiv();
+  // Una notificación de error, que se cierra sola; si el error viene de la API, añade su motivo
+  // (el campo message de la respuesta)
+  showErrorMessage: function (message, error) {
+    let reason = error?.response?.data?.message;
+    ezToast(reason ? `${message}: ${reason}` : message, "error", 8000);
+  },
 
-        if (errorsDiv === null) {
-            console.error("You tried to render the following message, however, a " +
-                `<div id="${msgsDivID}"> could not be found in your view to show it there:`);
-            console.error(message);
-            return;
-        }
-
-        let messageElem = parseHTML(html);
-        errorsDiv.appendChild(messageElem);
-    },
-
-    showErrorMessage: function (message) {
-        this.showMessageAsAlert(message, "danger");
-    },
-
-    showWarningMessage: function (message) {
-        this.showMessageAsAlert(message, "warning");
-    },
-
-    showSuccessMessage: function (message) {
-        this.showMessageAsAlert(message, "success");
-    },
-}
+  // Los errores en una alerta de error de ez-ui dentro del contenedor (sin errores, lo vacía): para
+  // los que el usuario tiene que corregir, como los de un formulario, que no deben desaparecer solos
+  showErrorsAsAlert: function (container, errors) {
+    container.replaceChildren();
+    if (errors.length === 0) {
+      return;
+    }
+    let alert = document.createElement("div");
+    alert.className = "ez-alert ez-alert--error";
+    alert.setAttribute("role", "alert");
+    let list = document.createElement("ul");
+    for (let error of errors) {
+      let item = document.createElement("li");
+      item.textContent = error;
+      list.append(item);
+    }
+    alert.append(list);
+    container.append(alert);
+  },
+};
 
 export { messageRenderer };

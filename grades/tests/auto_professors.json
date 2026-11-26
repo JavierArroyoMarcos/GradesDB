@@ -1,0 +1,62 @@
+{
+    "professors_getAll_ok": {
+        "description": "GET /professors: returns the current rows",
+        "endpoint": "GET /professors",
+        "GET /professors": null,
+        "expect": 200
+    },
+    "professors_create_ok": {
+        "description": "POST /professors: creates a row",
+        "endpoint": "POST /professors",
+        "POST /professors": {
+            "professor_id": 6,
+            "category": "Catedrático"
+        },
+        "expect": 201
+    },
+    "professors_create_missing_param": {
+        "description": "POST /professors: without 'professor_id' is a 400",
+        "endpoint": "POST /professors",
+        "POST /professors": {
+            "category": "Catedrático"
+        },
+        "expect": {
+            "status": 400,
+            "message": "professor_id"
+        }
+    },
+    "professors_delete_not_found": {
+        "description": "DELETE /professors/$professor_id: a row that does not exist is a 404",
+        "endpoint": "DELETE /professors/$professor_id",
+        "DELETE /professors/999999999": null,
+        "expect": 404
+    },
+    "professors_getById_ok": {
+        "description": "GET /professors/$professor_id: returns the current rows",
+        "endpoint": "GET /professors/$professor_id",
+        "GET /professors/1": null,
+        "expect": 200
+    },
+    "professors_getById_not_found": {
+        "description": "GET /professors/$professor_id: a row that does not exist is a 404",
+        "endpoint": "GET /professors/$professor_id",
+        "GET /professors/999999999": null,
+        "expect": 404
+    },
+    "professors_update_ok": {
+        "description": "PUT /professors/$professor_id: updates a row (with its current values)",
+        "endpoint": "PUT /professors/$professor_id",
+        "PUT /professors/1": {
+            "category": "Catedrático"
+        },
+        "expect": 200
+    },
+    "professors_update_not_found": {
+        "description": "PUT /professors/$professor_id: a row that does not exist is a 404",
+        "endpoint": "PUT /professors/$professor_id",
+        "PUT /professors/999999999": {
+            "category": "Catedrático"
+        },
+        "expect": 404
+    }
+}

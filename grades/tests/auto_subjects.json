@@ -1,0 +1,86 @@
+{
+    "subjects_getAll_ok": {
+        "description": "GET /subjects: returns the current rows",
+        "endpoint": "GET /subjects",
+        "GET /subjects": null,
+        "expect": 200
+    },
+    "subjects_create_ok": {
+        "description": "POST /subjects: creates a row",
+        "endpoint": "POST /subjects",
+        "POST /subjects": {
+            "degree_id": 3,
+            "subject_name": "Fundamentos de Programación-t1",
+            "acronym": "FP-t1",
+            "credits": 12,
+            "course": 1,
+            "subject_type": "Formación Básica"
+        },
+        "expect": 201
+    },
+    "subjects_create_missing_param": {
+        "description": "POST /subjects: without 'degree_id' is a 400",
+        "endpoint": "POST /subjects",
+        "POST /subjects": {
+            "subject_name": "Fundamentos de Programación-t1",
+            "acronym": "FP-t1",
+            "credits": 12,
+            "course": 1,
+            "subject_type": "Formación Básica"
+        },
+        "expect": {
+            "status": 400,
+            "message": "degree_id"
+        }
+    },
+    "subjects_delete_not_found": {
+        "description": "DELETE /subjects/$subject_id: a row that does not exist is a 404",
+        "endpoint": "DELETE /subjects/$subject_id",
+        "DELETE /subjects/999999999": null,
+        "expect": 404
+    },
+    "subjects_delete_ok": {
+        "description": "DELETE /subjects/$subject_id: deletes a row that no other row references",
+        "endpoint": "DELETE /subjects/$subject_id",
+        "DELETE /subjects/3": null,
+        "expect": 200
+    },
+    "subjects_getById_ok": {
+        "description": "GET /subjects/$subject_id: returns the current rows",
+        "endpoint": "GET /subjects/$subject_id",
+        "GET /subjects/1": null,
+        "expect": 200
+    },
+    "subjects_getById_not_found": {
+        "description": "GET /subjects/$subject_id: a row that does not exist is a 404",
+        "endpoint": "GET /subjects/$subject_id",
+        "GET /subjects/999999999": null,
+        "expect": 404
+    },
+    "subjects_update_ok": {
+        "description": "PUT /subjects/$subject_id: updates a row (with its current values)",
+        "endpoint": "PUT /subjects/$subject_id",
+        "PUT /subjects/1": {
+            "degree_id": 3,
+            "subject_name": "Fundamentos de Programación",
+            "acronym": "FP",
+            "credits": 12,
+            "course": 1,
+            "subject_type": "Formación Básica"
+        },
+        "expect": 200
+    },
+    "subjects_update_not_found": {
+        "description": "PUT /subjects/$subject_id: a row that does not exist is a 404",
+        "endpoint": "PUT /subjects/$subject_id",
+        "PUT /subjects/999999999": {
+            "degree_id": 3,
+            "subject_name": "Fundamentos de Programación",
+            "acronym": "FP",
+            "credits": 12,
+            "course": 1,
+            "subject_type": "Formación Básica"
+        },
+        "expect": 404
+    }
+}

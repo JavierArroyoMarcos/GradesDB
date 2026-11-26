@@ -1,0 +1,60 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'degrees'",
+        "route": "/degrees",
+        "method": "GET",
+        "sql": "SELECT * FROM degrees",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'degrees' by its primary key",
+        "route": "/degrees/$degree_id",
+        "method": "GET",
+        "sql": "SELECT * FROM degrees WHERE degree_id = $degree_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'degrees'",
+        "route": "/degrees",
+        "method": "POST",
+        "sql": "INSERT INTO degrees(degree_name, duration_years) VALUES ($degree_name, $duration_years)",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "degree_name",
+            "duration_years"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'degrees' by its primary key",
+        "route": "/degrees/$degree_id",
+        "method": "PUT",
+        "sql": "UPDATE degrees SET degree_name = $degree_name, duration_years = $duration_years WHERE degree_id = $degree_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "degree_name",
+            "duration_years"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'degrees' by its primary key",
+        "route": "/degrees/$degree_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM degrees WHERE degree_id = $degree_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

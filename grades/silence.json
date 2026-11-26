@@ -1,0 +1,51 @@
+{
+    "version": 3,
+    "server": {
+        "address": "127.0.0.1",
+        "port": 8080,
+        "api_prefix": "/api",
+        "open_browser": true,
+        "log_bodies": true,
+        "decimals_as_strings": false,
+        "check_updates": true
+    },
+    "database": {
+        "host": "127.0.0.1",
+        "port": 3306,
+        "user": "iissi_user",
+        "password": "iissi$user",
+        "name": "grades_db",
+        "scripts": [
+            "create_db.sql",
+            "functions.sql",
+            "triggers.sql",
+            "populate_db.sql",
+            "populate_db2.sql",
+            "auth.sql"
+        ]
+    },
+    "auth": {
+        "table": "people",
+        "identifier": "email",
+        "password": "password",
+        "role": "role",
+        "active": "",
+        "password_mode": "plain",
+        "login": true,
+        "token_max_age": 86400
+    },
+    "js_api": {
+        "enabled": true,
+        "dir": "web/js/api/_auto"
+    },
+    "admin": {
+        "repo": "DEAL-US/silence-v3-admin-panel-uikit",
+        "version": "v1.4.0"
+    },
+    "template": {
+        "repo": "DEAL-US/silence-template-v3-ez-ui",
+        "version": "v1.4.0"
+    },
+    "debug": false,
+    "secret_key": "cKFto_l10tEjk88McxrRL3pHLIUe6jADVgm4WE7JuoI"
+}

@@ -1,0 +1,78 @@
+{
+    "groups_getAll_ok": {
+        "description": "GET /groups: returns the current rows",
+        "endpoint": "GET /groups",
+        "GET /groups": null,
+        "expect": 200
+    },
+    "groups_create_ok": {
+        "description": "POST /groups: creates a row",
+        "endpoint": "POST /groups",
+        "POST /groups": {
+            "subject_id": 18,
+            "group_name": "T1",
+            "activity": "Teoría",
+            "academic_year": 2024
+        },
+        "expect": 201
+    },
+    "groups_create_missing_param": {
+        "description": "POST /groups: without 'subject_id' is a 400",
+        "endpoint": "POST /groups",
+        "POST /groups": {
+            "group_name": "T1",
+            "activity": "Teoría",
+            "academic_year": 2024
+        },
+        "expect": {
+            "status": 400,
+            "message": "subject_id"
+        }
+    },
+    "groups_delete_not_found": {
+        "description": "DELETE /groups/$group_id: a row that does not exist is a 404",
+        "endpoint": "DELETE /groups/$group_id",
+        "DELETE /groups/999999999": null,
+        "expect": 404
+    },
+    "groups_delete_ok": {
+        "description": "DELETE /groups/$group_id: deletes a row that no other row references",
+        "endpoint": "DELETE /groups/$group_id",
+        "DELETE /groups/12": null,
+        "expect": 200
+    },
+    "groups_getById_ok": {
+        "description": "GET /groups/$group_id: returns the current rows",
+        "endpoint": "GET /groups/$group_id",
+        "GET /groups/1": null,
+        "expect": 200
+    },
+    "groups_getById_not_found": {
+        "description": "GET /groups/$group_id: a row that does not exist is a 404",
+        "endpoint": "GET /groups/$group_id",
+        "GET /groups/999999999": null,
+        "expect": 404
+    },
+    "groups_update_ok": {
+        "description": "PUT /groups/$group_id: updates a row (with its current values)",
+        "endpoint": "PUT /groups/$group_id",
+        "PUT /groups/1": {
+            "subject_id": 11,
+            "group_name": "T1",
+            "activity": "Teoría",
+            "academic_year": 2024
+        },
+        "expect": 200
+    },
+    "groups_update_not_found": {
+        "description": "PUT /groups/$group_id: a row that does not exist is a 404",
+        "endpoint": "PUT /groups/$group_id",
+        "PUT /groups/999999999": {
+            "subject_id": 11,
+            "group_name": "T1",
+            "activity": "Teoría",
+            "academic_year": 2024
+        },
+        "expect": 404
+    }
+}

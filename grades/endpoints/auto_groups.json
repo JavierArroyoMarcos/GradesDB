@@ -1,0 +1,64 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'groups'",
+        "route": "/groups",
+        "method": "GET",
+        "sql": "SELECT * FROM groups",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'groups' by its primary key",
+        "route": "/groups/$group_id",
+        "method": "GET",
+        "sql": "SELECT * FROM groups WHERE group_id = $group_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'groups'",
+        "route": "/groups",
+        "method": "POST",
+        "sql": "INSERT INTO groups(subject_id, group_name, activity, academic_year) VALUES ($subject_id, $group_name, $activity, $academic_year)",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "subject_id",
+            "group_name",
+            "activity",
+            "academic_year"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'groups' by its primary key",
+        "route": "/groups/$group_id",
+        "method": "PUT",
+        "sql": "UPDATE groups SET subject_id = $subject_id, group_name = $group_name, activity = $activity, academic_year = $academic_year WHERE group_id = $group_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "subject_id",
+            "group_name",
+            "activity",
+            "academic_year"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'groups' by its primary key",
+        "route": "/groups/$group_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM groups WHERE group_id = $group_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

@@ -1,0 +1,68 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'subjects'",
+        "route": "/subjects",
+        "method": "GET",
+        "sql": "SELECT * FROM subjects",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'subjects' by its primary key",
+        "route": "/subjects/$subject_id",
+        "method": "GET",
+        "sql": "SELECT * FROM subjects WHERE subject_id = $subject_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'subjects'",
+        "route": "/subjects",
+        "method": "POST",
+        "sql": "INSERT INTO subjects(degree_id, subject_name, acronym, credits, course, subject_type) VALUES ($degree_id, $subject_name, $acronym, $credits, $course, $subject_type)",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "degree_id",
+            "subject_name",
+            "acronym",
+            "credits",
+            "course",
+            "subject_type"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'subjects' by its primary key",
+        "route": "/subjects/$subject_id",
+        "method": "PUT",
+        "sql": "UPDATE subjects SET degree_id = $degree_id, subject_name = $subject_name, acronym = $acronym, credits = $credits, course = $course, subject_type = $subject_type WHERE subject_id = $subject_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "degree_id",
+            "subject_name",
+            "acronym",
+            "credits",
+            "course",
+            "subject_type"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'subjects' by its primary key",
+        "route": "/subjects/$subject_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM subjects WHERE subject_id = $subject_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

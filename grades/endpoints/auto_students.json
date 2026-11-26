@@ -1,0 +1,59 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'students'",
+        "route": "/students",
+        "method": "GET",
+        "sql": "SELECT * FROM students",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'students' by its primary key",
+        "route": "/students/$student_id",
+        "method": "GET",
+        "sql": "SELECT * FROM students WHERE student_id = $student_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'students'",
+        "route": "/students",
+        "method": "POST",
+        "sql": "INSERT INTO students(student_id, access_method) VALUES ($student_id, $access_method)",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "student_id",
+            "access_method"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'students' by its primary key",
+        "route": "/students/$student_id",
+        "method": "PUT",
+        "sql": "UPDATE students SET access_method = $access_method WHERE student_id = $student_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "access_method"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'students' by its primary key",
+        "route": "/students/$student_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM students WHERE student_id = $student_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

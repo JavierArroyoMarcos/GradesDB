@@ -1,0 +1,84 @@
+{
+    "people_getAll_ok": {
+        "description": "GET /people: returns the current rows",
+        "endpoint": "GET /people",
+        "GET /people": null,
+        "expect": 200
+    },
+    "people_create_ok": {
+        "description": "POST /people: creates a row",
+        "endpoint": "POST /people",
+        "POST /people": {
+            "dni": "00000002A",
+            "first_name": "David",
+            "last_name": "Ruiz",
+            "age": 50,
+            "email": "t1.druiz@us.es",
+            "password": "Test-1234",
+            "role": "admin"
+        },
+        "expect": 201
+    },
+    "people_create_missing_param": {
+        "description": "POST /people: without 'dni' is a 400",
+        "endpoint": "POST /people",
+        "POST /people": {
+            "first_name": "David",
+            "last_name": "Ruiz",
+            "age": 50,
+            "email": "t1.druiz@us.es",
+            "password": "Test-1234",
+            "role": "admin"
+        },
+        "expect": {
+            "status": 400,
+            "message": "dni"
+        }
+    },
+    "people_delete_not_found": {
+        "description": "DELETE /people/$person_id: a row that does not exist is a 404",
+        "endpoint": "DELETE /people/$person_id",
+        "DELETE /people/999999999": null,
+        "expect": 404
+    },
+    "people_getById_ok": {
+        "description": "GET /people/$person_id: returns the current rows",
+        "endpoint": "GET /people/$person_id",
+        "GET /people/1": null,
+        "expect": 200
+    },
+    "people_getById_not_found": {
+        "description": "GET /people/$person_id: a row that does not exist is a 404",
+        "endpoint": "GET /people/$person_id",
+        "GET /people/999999999": null,
+        "expect": 404
+    },
+    "people_update_ok": {
+        "description": "PUT /people/$person_id: updates a row (with its current values)",
+        "endpoint": "PUT /people/$person_id",
+        "PUT /people/1": {
+            "dni": "00000001A",
+            "first_name": "David",
+            "last_name": "Ruiz",
+            "age": 50,
+            "email": "druiz@us.es",
+            "password": "Test-1234",
+            "role": "admin"
+        },
+        "expect": 200
+    },
+    "people_update_not_found": {
+        "description": "PUT /people/$person_id: a row that does not exist is a 404",
+        "endpoint": "PUT /people/$person_id",
+        "PUT /people/999999999": {
+            "dni": "00000001A",
+            "first_name": "David",
+            "last_name": "Ruiz",
+            "age": 50,
+            "email": "druiz@us.es",
+            "password": "Test-1234",
+            "role": "admin"
+        },
+        "expect": 404
+    }
+}

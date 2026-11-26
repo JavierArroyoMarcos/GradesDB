@@ -1,0 +1,59 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'professors'",
+        "route": "/professors",
+        "method": "GET",
+        "sql": "SELECT * FROM professors",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'professors' by its primary key",
+        "route": "/professors/$professor_id",
+        "method": "GET",
+        "sql": "SELECT * FROM professors WHERE professor_id = $professor_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'professors'",
+        "route": "/professors",
+        "method": "POST",
+        "sql": "INSERT INTO professors(professor_id, category) VALUES ($professor_id, $category)",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "professor_id",
+            "category"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'professors' by its primary key",
+        "route": "/professors/$professor_id",
+        "method": "PUT",
+        "sql": "UPDATE professors SET category = $category WHERE professor_id = $professor_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "category"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'professors' by its primary key",
+        "route": "/professors/$professor_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM professors WHERE professor_id = $professor_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

@@ -1,0 +1,60 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'students_subjects'",
+        "route": "/students_subjects",
+        "method": "GET",
+        "sql": "SELECT * FROM students_subjects",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'students_subjects' by its primary key",
+        "route": "/students_subjects/$student_subject_id",
+        "method": "GET",
+        "sql": "SELECT * FROM students_subjects WHERE student_subject_id = $student_subject_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'students_subjects'",
+        "route": "/students_subjects",
+        "method": "POST",
+        "sql": "INSERT INTO students_subjects(student_id, subject_id) VALUES ($student_id, $subject_id)",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "student_id",
+            "subject_id"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'students_subjects' by its primary key",
+        "route": "/students_subjects/$student_subject_id",
+        "method": "PUT",
+        "sql": "UPDATE students_subjects SET student_id = $student_id, subject_id = $subject_id WHERE student_subject_id = $student_subject_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ],
+        "request_body_params": [
+            "student_id",
+            "subject_id"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'students_subjects' by its primary key",
+        "route": "/students_subjects/$student_subject_id",
+        "method": "DELETE",
+        "sql": "DELETE FROM students_subjects WHERE student_subject_id = $student_subject_id",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

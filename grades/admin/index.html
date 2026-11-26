@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Silence admin</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/uikit/css/uikit.min.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <script src="vendor/uikit/js/uikit.min.js"></script>
+  <script src="vendor/uikit/js/uikit-icons.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <div class="sa-layout">
+    <aside class="sa-side uk-light">
+      <a class="sa-brand" href="#/"><img class="sa-brand__logo" src="images/silence-logo.svg" alt="Silence"> <span class="sa-brand__sub">admin</span></a>
+      <button class="uk-button uk-button-default uk-button-small sa-menu-toggle" type="button"
+              uk-toggle="target: #nav; cls: sa-nav--open" aria-controls="nav">Menu</button>
+      <ul class="uk-nav uk-nav-default sa-nav" id="nav">
+        <li><a href="#/"><span uk-icon="home"></span> Overview</a></li>
+        <li><a href="#/database"><span uk-icon="database"></span> Database <span class="sa-dot" id="dot-database"></span></a></li>
+        <li><a href="#/endpoints"><span uk-icon="link"></span> Endpoints <span class="uk-badge" id="count-endpoints"></span></a></li>
+        <li><a href="#/js"><span uk-icon="code"></span> JavaScript</a></li>
+        <li><a href="#/logs"><span uk-icon="history"></span> Logs <span class="uk-badge sa-badge--fail" id="count-failures"></span></a></li>
+        <li class="uk-nav-divider"></li>
+        <li><a id="link-web" href="/" target="_blank" title="Your web app (web/), in another tab"><span uk-icon="world"></span>
+          Web app <span uk-icon="icon: forward; ratio: .8" class="sa-nav__external"></span></a></li>
+      </ul>
+      <div class="sa-side__footer">
+        <!-- What the panel is waiting for (lib/busy.js) -->
+        <div id="busy" class="sa-busy-list" role="status" aria-live="polite" hidden></div>
+        <div id="acting-as" class="sa-acting" hidden></div>
+        <p class="sa-version" id="version"></p>
+      </div>
+    </aside>
+    <main class="sa-main">
+      <nav class="sa-topbar" id="topbar" aria-label="Breadcrumb"></nav>
+      <div id="page"></div>
+    </main>
+  </div>
+  <!-- What the notifications say, for the screen readers -->
+  <div class="sa-sr-only" id="announce" aria-live="polite"></div>
+</body>
+</html>
