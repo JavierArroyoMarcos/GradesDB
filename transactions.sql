@@ -151,3 +151,11 @@ WHERE student_id IN (6, 7, 8) AND exam_call = 'Extraordinaria';
 
 
 
+
+
+
+
+-- PROCEDIMIENTO TRANSACCIONAL
+
+
+
